@@ -33,7 +33,7 @@ var moving_right = true
 func switch_direction():
 	moving_right = !moving_right
 	velocity_vector.x *= -1
-	# since player_dot is acutally a half circle, we need to flip its direction
+	# since player_dot is acutally a half circle, we need to flip its rotation
 	$player_dot.rotation_degrees *= -1
 
 # append new position into the Line2D of the trailing tail
