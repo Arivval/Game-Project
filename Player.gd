@@ -18,6 +18,11 @@
 """
 extends Area2D
 
+const CollisionLayer = {
+	"obstcales": 1,
+	"walls": 2,	
+}
+
 var x_speed = 300
 var y_speed = -300
 var velocity_vector = Vector2(x_speed, y_speed)
@@ -37,4 +42,9 @@ func _ready():
 
 func _process(delta):
 	position += velocity_vector * delta
-	
+
+# handle collision events with wall/obstacles
+func _on_Player_area_entered(area):
+	if area.collision_layer == CollisionLayer.walls:
+		switch_direction()
+
