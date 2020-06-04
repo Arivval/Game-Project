@@ -23,14 +23,26 @@ const CollisionLayer = {
 	"walls": 2,	
 }
 
-var x_speed = 300
-var y_speed = -300
+var trailing_tail
+var previous_position
+var x_speed = 400
+var y_speed = -400
 var velocity_vector = Vector2(x_speed, y_speed)
 var moving_right = true
 
 func switch_direction():
 	moving_right = !moving_right
 	velocity_vector.x *= -1
+	# since player_dot is acutally a half circle, we need to flip its direction
+	$player_dot.rotation_degrees *= -1
+
+# append new position into the Line2D of the trailing tail
+# while removing old point
+func update_tail(position_delta):
+	var new_point = position_delta + trailing_tail.points[0]
+	trailing_tail.add_point(new_point, 0)
+	if len(trailing_tail.points) > 15:
+		trailing_tail.remove_point(15)
 
 # callback to react to player inputs 
 func _input(event):
@@ -38,10 +50,12 @@ func _input(event):
 		switch_direction()
 
 func _ready():
-	pass
+	trailing_tail = get_owner().get_node("trailing_tail")
 
 func _process(delta):
-	position += velocity_vector * delta
+	var position_delta = velocity_vector * delta
+	position += position_delta
+	update_tail(position_delta)
 
 # handle collision events with wall/obstacles
 func _on_Player_area_entered(area):

@@ -1,12 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://art/player_dot.png" type="Texture" id=1]
+[ext_resource path="res://art/player_dot_half.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0, 1, 0.992157, 1, 0, 0.8, 0.847059, 0 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 22.5923
 
-[sub_resource type="SegmentShape2D" id=2]
+[sub_resource type="SegmentShape2D" id=3]
 b = Vector2( 0.0160542, 1031 )
 
 [node name="Node2D" type="Node2D"]
@@ -14,7 +17,8 @@ b = Vector2( 0.0160542, 1031 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 542.0
+margin_left = 0.228287
+margin_right = 542.228
 margin_bottom = 1031.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -23,15 +27,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="trailing_tail" type="Line2D" parent="."]
+position = Vector2( 275.38, 892.125 )
+points = PoolVector2Array( 0.582245, -0.574524, -74.803, 75.7156 )
+width = 45.0
+default_color = Color( 0, 0.8, 0.847059, 1 )
+gradient = SubResource( 2 )
+joint_mode = 2
+round_precision = 100
+
 [node name="Player" type="Area2D" parent="."]
 position = Vector2( 275.729, 891.776 )
 script = ExtResource( 2 )
 
 [node name="player_dot" type="Sprite" parent="Player"]
+rotation = 0.785398
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="ReflectiveWallLeft" type="Area2D" parent="."]
@@ -43,7 +58,7 @@ width = 1.0
 default_color = Color( 0.4, 0.501961, 1, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReflectiveWallLeft"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 one_way_collision_margin = 0.0
 
 [node name="ReflectiveWallRight" type="Area2D" parent="."]
@@ -56,7 +71,7 @@ width = 1.0
 default_color = Color( 1, 1, 1, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReflectiveWallRight"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 one_way_collision_margin = 0.0
 [connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
