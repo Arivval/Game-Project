@@ -18,6 +18,8 @@
 """
 extends Area2D
 
+signal end_signal
+
 const CollisionLayer = {
 	"obstacles": 1,
 	"walls": 2,	
@@ -30,11 +32,17 @@ var y_speed = 0
 var velocity_vector = Vector2(x_speed, y_speed)
 var moving_right = true
 var started = false
+var initial_position
+var initial_tail_points
 
 
 func start_game():
 	velocity_vector = Vector2(400, -400)
 	started = true
+
+func end_game():
+	velocity_vector = Vector2(0, 0)
+	started = false
 
 func switch_direction():
 	moving_right = !moving_right
@@ -50,6 +58,11 @@ func update_tail(position_delta):
 	if len(trailing_tail.points) > 15:
 		trailing_tail.remove_point(15)
 
+# recover the position for dot and tail saved in initial_position
+# and initial_tail_points
+func reset_dot_position():
+	position = initial_position
+	trailing_tail.points = initial_tail_points
 
 # callback to react to player inputs 
 func _input(event):
@@ -58,6 +71,8 @@ func _input(event):
 
 func _ready():
 	trailing_tail = get_owner().get_node("trailing_tail")
+	initial_position = position
+	initial_tail_points = trailing_tail.points
 
 func _process(delta):
 	if started:
@@ -71,4 +86,5 @@ func _on_Player_area_entered(area):
 		switch_direction()
 	if area.collision_layer == CollisionLayer.obstacles:
 		print('hit wall')
+		emit_signal('end_signal')
 

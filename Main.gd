@@ -22,11 +22,26 @@ func start_game():
 	score = 0
 	$CanvasLayer.hide_start_screen()
 	$CanvasLayer.show_in_game_screen()
+	$CanvasLayer.set_score(score)
 	$Timer.start()
 	$Player.start_game()
 
 func end_game():
 	$Timer.stop()
+	$Player.end_game()
+	$CanvasLayer.hide_in_game_screen()
+	$CanvasLayer.set_end_screen_score(score)
+	$CanvasLayer.show_end_screen()
+
+func restart_game():
+	$Player.reset_dot_position()
+	$CanvasLayer.hide_end_screen()
+	start_game()
+
+func to_main_screen():
+	$Player.reset_dot_position()
+	$CanvasLayer.hide_end_screen()
+	$CanvasLayer.show_start_screen()
 
 func _ready():
 	pass
