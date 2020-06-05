@@ -33,11 +33,11 @@ font_data = ExtResource( 3 )
 size = 32
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=8]
 size = 80
 font_data = ExtResource( 3 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 89.7661, 133.624 )
 
 [node name="Node2D" type="Node2D"]
@@ -137,7 +137,6 @@ __meta__ = {
 [node name="title" type="Node" parent="CanvasLayer"]
 
 [node name="title_text_shadow" type="Label" parent="CanvasLayer/title"]
-visible = false
 margin_left = 0.344162
 margin_top = 157.656
 margin_right = 537.344
@@ -151,7 +150,6 @@ __meta__ = {
 }
 
 [node name="title_text" type="Label" parent="CanvasLayer/title"]
-visible = false
 margin_left = 2.0
 margin_top = 156.0
 margin_right = 539.0
@@ -197,7 +195,7 @@ margin_left = -1.0
 margin_top = 81.4905
 margin_right = 540.0
 margin_bottom = 420.491
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
 text = "Score: 0"
 align = 1
@@ -211,7 +209,7 @@ visible = false
 margin_top = 79.4905
 margin_right = 541.0
 margin_bottom = 418.491
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "Score: 0"
 align = 1
 valign = 1
@@ -260,7 +258,7 @@ rotation = 0.785398
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle"]
 position = Vector2( 520, 374 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle"]
 margin_left = 430.0
