@@ -22,7 +22,8 @@ signal end_signal
 
 const CollisionLayer = {
 	"obstacles": 1,
-	"walls": 2,	
+	"left_wall": 2,
+	"right_wall": 4,	
 }
 
 var trailing_tail
@@ -34,7 +35,8 @@ var moving_right = true
 var started = false
 var initial_position
 var initial_tail_points
-
+var screen_width
+var player_radius
 
 func start_game():
 	velocity_vector = Vector2(400, -400)
@@ -53,6 +55,11 @@ func switch_direction():
 	$player_dot.rotation_degrees *= -1
 
 
+func set_moving_right(condition):
+	if !moving_right == condition:
+		switch_direction()
+
+
 # append new position into the Line2D of the trailing tail
 # while removing old point
 func update_tail(position_delta):
@@ -67,6 +74,15 @@ func update_tail(position_delta):
 func reset_dot_position():
 	position = initial_position
 	trailing_tail.points = initial_tail_points
+	moving_right = true
+	$player_dot.rotation_degrees = 45.0
+
+
+func is_player_out_of_bound():
+	if position.x <= player_radius:
+		set_moving_right(true)
+	elif	 position.x >= screen_width - player_radius:
+		set_moving_right(false)
 
 
 # callback to react to player inputs 
@@ -79,6 +95,8 @@ func _ready():
 	trailing_tail = get_owner().get_node("trailing_tail")
 	initial_position = position
 	initial_tail_points = trailing_tail.points
+	screen_width = get_viewport_rect().size.x
+	player_radius = $CollisionShape2D.shape.radius
 
 
 func _process(delta):
@@ -86,14 +104,12 @@ func _process(delta):
 		var position_delta = velocity_vector * delta
 		position += position_delta
 		update_tail(position_delta)
+		is_player_out_of_bound()
 
 
 # handle collision events with wall/obstacles
 func _on_Player_area_entered(area):
-	if area.collision_layer == CollisionLayer.walls:
-		switch_direction()
 	if area.collision_layer == CollisionLayer.obstacles:
-		print('hit wall')
 		emit_signal('end_signal')
 
 

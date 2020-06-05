@@ -18,11 +18,8 @@ extends Node2D
 
 var score
 var player_node
-var left_wall_node
-var right_wall_node
 var background_node
 var player_init_position
-var wall_init_position
 var background_init_position
 
 
@@ -59,20 +56,15 @@ func to_main_screen():
 # background along with the player to make the map seem infinite
 func sync_player_background_y():
 	var y_delta = player_node.position.y - player_init_position.y
-	left_wall_node.position.y = wall_init_position.y + y_delta
-	right_wall_node.position.y = wall_init_position.y + y_delta
 	background_node.rect_position.y = background_init_position.y + y_delta
 
 
 func _ready():
 	# to save time, find node is only executed once
 	player_node = $Player
-	left_wall_node = $ReflectiveWallLeft
-	right_wall_node = $ReflectiveWallRight
 	background_node = $ColorRect
 	
 	player_init_position = player_node.position
-	wall_init_position = left_wall_node.position
 	background_init_position = background_node.rect_position
 
 
