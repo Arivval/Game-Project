@@ -51,8 +51,8 @@ __meta__ = {
 }
 
 [node name="trailing_tail" type="Line2D" parent="."]
-position = Vector2( 275.38, 892.125 )
-points = PoolVector2Array( 0.582245, -0.574524, -74.803, 75.7156 )
+position = Vector2( 276, 892 )
+points = PoolVector2Array( 0.326996, -0.339111, -74.803, 75.7156 )
 width = 45.0
 default_color = Color( 0, 0.8, 0.847059, 1 )
 gradient = SubResource( 1 )
@@ -60,7 +60,7 @@ joint_mode = 2
 round_precision = 100
 
 [node name="Player" type="Area2D" parent="."]
-position = Vector2( 275.729, 891.776 )
+position = Vector2( 276, 892 )
 script = ExtResource( 2 )
 
 [node name="player_dot" type="Sprite" parent="Player"]
@@ -156,7 +156,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="start_button" type="Button" parent="CanvasLayer"]
 margin_left = -1.0
 margin_top = 302.0
 margin_right = 537.0
@@ -170,7 +170,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="button_text" type="Label" parent="CanvasLayer/Button"]
+[node name="button_text" type="Label" parent="CanvasLayer/start_button"]
 margin_left = 0.143005
 margin_top = 453.861
 margin_right = 537.143
@@ -309,5 +309,6 @@ __meta__ = {
 }
 [connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
-[connection signal="button_down" from="CanvasLayer/Button" to="CanvasLayer" method="_on_Button_button_down"]
+[connection signal="start_signal" from="CanvasLayer" to="." method="start_game"]
+[connection signal="button_down" from="CanvasLayer/start_button" to="CanvasLayer" method="_on_start_button_button_down"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -20,13 +20,16 @@ var score
 
 func start_game():
 	score = 0
+	$CanvasLayer.hide_start_screen()
+	$CanvasLayer.show_in_game_screen()
 	$Timer.start()
+	$Player.start_game()
 
 func end_game():
 	$Timer.stop()
 
 func _ready():
-	start_game()
+	pass
 
 func _process(delta):
 	pass
@@ -34,3 +37,5 @@ func _process(delta):
 func _on_Timer_timeout():
 	score += 1
 	$CanvasLayer.set_score(score)
+
+

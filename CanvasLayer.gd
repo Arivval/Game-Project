@@ -16,9 +16,31 @@
 
 extends CanvasLayer
 
+signal start_signal
+
+
 func set_score(score):
 	$score_label.text = str(score)
 	$score_label_shadow.text = str(score)
+
+func hide_start_screen():
+	$title/title_text.hide()
+	$title/title_text_shadow.hide()
+	$start_button.hide()
+
+func show_start_screen():
+	$title/title_text.show()
+	$title/title_text_shadow.show()
+	$start_button.show()
+
+func hide_in_game_screen():
+	$score_label.hide()
+	$score_label_shadow.hide()
+
+func show_in_game_screen():
+	$score_label.show()
+	$score_label_shadow.show()
+
 
 func _ready():
 	pass
@@ -26,5 +48,5 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_Button_button_down():
-	pass
+func _on_start_button_button_down():
+	emit_signal('start_signal')

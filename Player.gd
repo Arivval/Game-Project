@@ -25,10 +25,16 @@ const CollisionLayer = {
 
 var trailing_tail
 var previous_position
-var x_speed = 400
-var y_speed = -400
+var x_speed = 0
+var y_speed = 0
 var velocity_vector = Vector2(x_speed, y_speed)
 var moving_right = true
+var started = false
+
+
+func start_game():
+	velocity_vector = Vector2(400, -400)
+	started = true
 
 func switch_direction():
 	moving_right = !moving_right
@@ -44,18 +50,20 @@ func update_tail(position_delta):
 	if len(trailing_tail.points) > 15:
 		trailing_tail.remove_point(15)
 
+
 # callback to react to player inputs 
 func _input(event):
-	if Input.is_action_just_pressed("switch_direction"):
+	if Input.is_action_just_pressed("switch_direction") and started:
 		switch_direction()
 
 func _ready():
 	trailing_tail = get_owner().get_node("trailing_tail")
 
 func _process(delta):
-	var position_delta = velocity_vector * delta
-	position += position_delta
-	update_tail(position_delta)
+	if started:
+		var position_delta = velocity_vector * delta
+		position += position_delta
+		update_tail(position_delta)
 
 # handle collision events with wall/obstacles
 func _on_Player_area_entered(area):
