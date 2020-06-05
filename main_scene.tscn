@@ -1,18 +1,47 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://art/player_dot_half.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://font/Roboto-Thin.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Main.gd" type="Script" id=4]
+[ext_resource path="res://CanvasLayer.gd" type="Script" id=5]
+[ext_resource path="res://art/exit_button_white.png" type="Texture" id=6]
+[ext_resource path="res://art/restart_button_white.png" type="Texture" id=7]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 1, 0.992157, 1, 0, 0.8, 0.847059, 0 )
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 22.5923
 
 [sub_resource type="SegmentShape2D" id=3]
 b = Vector2( 0.0160542, 1031 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 120
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 128
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 80
+font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 89.7661, 133.624 )
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -28,16 +57,16 @@ __meta__ = {
 }
 
 [node name="trailing_tail" type="Line2D" parent="."]
-position = Vector2( 275.38, 892.125 )
-points = PoolVector2Array( 0.582245, -0.574524, -74.803, 75.7156 )
+position = Vector2( 276, 892 )
+points = PoolVector2Array( 0.326996, -0.339111, -74.803, 75.7156 )
 width = 45.0
 default_color = Color( 0, 0.8, 0.847059, 1 )
-gradient = SubResource( 2 )
+gradient = SubResource( 1 )
 joint_mode = 2
 round_precision = 100
 
 [node name="Player" type="Area2D" parent="."]
-position = Vector2( 275.729, 891.776 )
+position = Vector2( 276, 892 )
 script = ExtResource( 2 )
 
 [node name="player_dot" type="Sprite" parent="Player"]
@@ -46,8 +75,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-visible = false
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="ReflectiveWallLeft" type="Area2D" parent="."]
 collision_layer = 2
@@ -73,5 +101,180 @@ default_color = Color( 1, 1, 1, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReflectiveWallRight"]
 shape = SubResource( 3 )
 one_way_collision_margin = 0.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 5 )
+
+[node name="score_label" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = -1.56128
+margin_top = 43.929
+margin_right = 537.439
+margin_bottom = 264.929
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score_label_shadow" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 1.43872
+margin_top = 41.929
+margin_right = 540.439
+margin_bottom = 262.929
+custom_fonts/font = SubResource( 4 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Node" parent="CanvasLayer"]
+
+[node name="title_text_shadow" type="Label" parent="CanvasLayer/title"]
+margin_left = 0.344162
+margin_top = 157.656
+margin_right = 537.344
+margin_bottom = 308.656
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
+text = "Dot Go!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title_text" type="Label" parent="CanvasLayer/title"]
+margin_left = 2.0
+margin_top = 156.0
+margin_right = 539.0
+margin_bottom = 307.0
+custom_fonts/font = SubResource( 5 )
+text = "Dot Go!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start_button" type="Button" parent="CanvasLayer"]
+margin_left = -1.0
+margin_top = 302.0
+margin_right = 537.0
+margin_bottom = 980.0
+focus_mode = 0
+custom_fonts/font = SubResource( 6 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button_text" type="Label" parent="CanvasLayer/start_button"]
+margin_left = -0.552674
+margin_top = 453.861
+margin_right = 536.447
+margin_bottom = 491.861
+custom_fonts/font = SubResource( 7 )
+text = "Tap to Start"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="end_game" type="Node" parent="CanvasLayer"]
+
+[node name="end_game_text_shadow" type="Label" parent="CanvasLayer/end_game"]
+visible = false
+margin_left = -1.0
+margin_top = 81.4905
+margin_right = 540.0
+margin_bottom = 420.491
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
+text = "Score: 0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="end_game_text" type="Label" parent="CanvasLayer/end_game"]
+visible = false
+margin_top = 79.4905
+margin_right = 541.0
+margin_bottom = 418.491
+custom_fonts/font = SubResource( 8 )
+text = "Score: 0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="restart_button" type="Button" parent="CanvasLayer"]
+visible = false
+margin_left = 338.581
+margin_top = 562.515
+margin_right = 550.581
+margin_bottom = 769.515
+rect_scale = Vector2( 0.45, 0.45 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 7 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_button" type="Button" parent="CanvasLayer"]
+visible = false
+margin_left = 115.425
+margin_top = 567.833
+margin_right = 327.425
+margin_bottom = 774.833
+rect_scale = Vector2( 0.4, 0.4 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 6 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle" type="Area2D" parent="Obstacles"]
+position = Vector2( 203.169, -614.258 )
+rotation = 0.785398
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle"]
+position = Vector2( 520, 374 )
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle"]
+margin_left = 430.0
+margin_top = 240.0
+margin_right = 609.0
+margin_bottom = 508.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
+[connection signal="end_signal" from="Player" to="." method="end_game"]
+[connection signal="back_signal" from="CanvasLayer" to="." method="to_main_screen"]
+[connection signal="restart_signal" from="CanvasLayer" to="." method="restart_game"]
+[connection signal="start_signal" from="CanvasLayer" to="." method="start_game"]
+[connection signal="button_down" from="CanvasLayer/start_button" to="CanvasLayer" method="_on_start_button_button_down"]
+[connection signal="pressed" from="CanvasLayer/restart_button" to="CanvasLayer" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/back_button" to="CanvasLayer" method="_on_back_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
