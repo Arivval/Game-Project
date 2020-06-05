@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://art/player_dot_half.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://CanvasLayer.gd" type="Script" id=5]
 [ext_resource path="res://art/exit_button_white.png" type="Texture" id=6]
 [ext_resource path="res://art/restart_button_white.png" type="Texture" id=7]
+[ext_resource path="res://art/restart_button_grey.png" type="Texture" id=8]
+[ext_resource path="res://art/exit_button_grey.png" type="Texture" id=9]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 1, 0.992157, 1, 0, 0.8, 0.847059, 0 )
@@ -226,6 +228,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="restart_button2" type="Button" parent="CanvasLayer"]
+visible = false
+margin_left = 336.581
+margin_top = 565.515
+margin_right = 548.581
+margin_bottom = 772.515
+rect_scale = Vector2( 0.45, 0.45 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 8 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="restart_button" type="Button" parent="CanvasLayer"]
 visible = false
 margin_left = 338.581
@@ -236,6 +253,21 @@ rect_scale = Vector2( 0.45, 0.45 )
 focus_mode = 0
 enabled_focus_mode = 0
 icon = ExtResource( 7 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_button2" type="Button" parent="CanvasLayer"]
+visible = false
+margin_left = 113.425
+margin_top = 570.833
+margin_right = 325.425
+margin_bottom = 777.833
+rect_scale = Vector2( 0.4, 0.4 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 9 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -280,216 +312,6 @@ margin_bottom = 508.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Obstacle2" type="Area2D" parent="Obstacles"]
-position = Vector2( -500.353, -1421.9 )
-rotation = 0.785398
-scale = Vector2( 2, 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle2"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle2"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle3" type="Area2D" parent="Obstacles"]
-position = Vector2( 75.5815, -1688.11 )
-rotation = 0.785398
-scale = Vector2( 2, 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle3"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle3"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle4" type="Area2D" parent="Obstacles"]
-position = Vector2( -277.353, -2320.85 )
-rotation = 0.785398
-scale = Vector2( 2, 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle4"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle4"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle5" type="Area2D" parent="Obstacles"]
-position = Vector2( -407.501, -3240.72 )
-rotation = 0.785398
-scale = Vector2( 2, 1.5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle5"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle5"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle7" type="Area2D" parent="Obstacles"]
-position = Vector2( -386.995, -3830.01 )
-rotation = 0.785398
-scale = Vector2( 2, 1.5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle7"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle7"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle9" type="Area2D" parent="Obstacles"]
-position = Vector2( -422.036, -4435.27 )
-rotation = 0.785398
-scale = Vector2( 2, 1.5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle9"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle9"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle10" type="Area2D" parent="Obstacles"]
-position = Vector2( -441.15, -5183.88 )
-rotation = 0.785398
-scale = Vector2( 2, 1.5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle10"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle10"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle6" type="Area2D" parent="Obstacles"]
-position = Vector2( 318.244, -3264.98 )
-rotation = 0.785398
-scale = Vector2( 2, 1.5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle6"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle6"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle8" type="Area2D" parent="Obstacles"]
-position = Vector2( 269.754, -3859.67 )
-rotation = 0.785398
-scale = Vector2( 2, 1.5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle8"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle8"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle11" type="Area2D" parent="Obstacles"]
-position = Vector2( 862.306, -5240.83 )
-rotation = 0.785398
-scale = Vector2( 1.6, 3 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle11"]
-position = Vector2( 520, 374 )
-shape = SubResource( 9 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle11"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
 [connection signal="end_signal" from="Player" to="." method="end_game"]
@@ -497,6 +319,8 @@ __meta__ = {
 [connection signal="restart_signal" from="CanvasLayer" to="." method="restart_game"]
 [connection signal="start_signal" from="CanvasLayer" to="." method="start_game"]
 [connection signal="button_down" from="CanvasLayer/start_button" to="CanvasLayer" method="_on_start_button_button_down"]
+[connection signal="pressed" from="CanvasLayer/restart_button2" to="CanvasLayer" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/restart_button" to="CanvasLayer" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/back_button2" to="CanvasLayer" method="_on_back_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/back_button" to="CanvasLayer" method="_on_back_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
