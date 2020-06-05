@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://art/player_dot_half.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -14,19 +14,12 @@ colors = PoolColorArray( 0, 1, 0.992157, 1, 0, 0.8, 0.847059, 0 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 22.5923
 
-[sub_resource type="SegmentShape2D" id=3]
-b = Vector2( 0.0160542, 1031 )
-
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 120
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 128
-font_data = ExtResource( 3 )
-
 [sub_resource type="DynamicFont" id=6]
-size = 32
+size = 128
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=7]
@@ -34,10 +27,14 @@ size = 32
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=9]
 size = 80
 font_data = ExtResource( 3 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 89.7661, 133.624 )
 
 [node name="Node2D" type="Node2D"]
@@ -86,31 +83,6 @@ limit_right = 542
 smoothing_enabled = true
 smoothing_speed = 7.0
 
-[node name="ReflectiveWallLeft" type="Area2D" parent="."]
-collision_layer = 2
-
-[node name="Line2D" type="Line2D" parent="ReflectiveWallLeft"]
-points = PoolVector2Array( 0.00267792, -0.00313663, 0.0655155, 1030.99 )
-width = 1.0
-default_color = Color( 0.4, 0.501961, 1, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ReflectiveWallLeft"]
-shape = SubResource( 3 )
-one_way_collision_margin = 0.0
-
-[node name="ReflectiveWallRight" type="Area2D" parent="."]
-position = Vector2( 540, 0 )
-collision_layer = 2
-
-[node name="Line2D" type="Line2D" parent="ReflectiveWallRight"]
-points = PoolVector2Array( 0.00267792, -0.00313663, 0.0655155, 1030.99 )
-width = 1.0
-default_color = Color( 1, 1, 1, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ReflectiveWallRight"]
-shape = SubResource( 3 )
-one_way_collision_margin = 0.0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource( 5 )
 
@@ -120,7 +92,7 @@ margin_left = -1.56128
 margin_top = 43.929
 margin_right = 537.439
 margin_bottom = 264.929
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
 text = "0"
 align = 1
@@ -135,7 +107,7 @@ margin_left = 1.43872
 margin_top = 41.929
 margin_right = 540.439
 margin_bottom = 262.929
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "0"
 align = 1
 valign = 1
@@ -150,7 +122,7 @@ margin_left = 0.344162
 margin_top = 157.656
 margin_right = 537.344
 margin_bottom = 308.656
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
 text = "Dot Go!"
 align = 1
@@ -163,7 +135,7 @@ margin_left = 2.0
 margin_top = 156.0
 margin_right = 539.0
 margin_bottom = 307.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Dot Go!"
 align = 1
 __meta__ = {
@@ -176,7 +148,7 @@ margin_top = 302.0
 margin_right = 537.0
 margin_bottom = 980.0
 focus_mode = 0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
 flat = true
@@ -189,7 +161,7 @@ margin_left = -0.552674
 margin_top = 453.861
 margin_right = 536.447
 margin_bottom = 491.861
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "Tap to Start"
 align = 1
 __meta__ = {
@@ -204,7 +176,7 @@ margin_left = -1.0
 margin_top = 81.4905
 margin_right = 540.0
 margin_bottom = 420.491
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
 text = "Score: 0"
 align = 1
@@ -218,7 +190,7 @@ visible = false
 margin_top = 79.4905
 margin_right = 541.0
 margin_bottom = 418.491
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "Score: 0"
 align = 1
 valign = 1
@@ -267,7 +239,7 @@ rotation = 0.785398
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle"]
 position = Vector2( 520, 374 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle"]
 margin_left = 430.0
