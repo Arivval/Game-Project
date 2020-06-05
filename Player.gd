@@ -82,6 +82,7 @@ func _ready():
 
 
 func _process(delta):
+	print(1/delta)
 	if started:
 		var position_delta = velocity_vector * delta
 		position += position_delta
