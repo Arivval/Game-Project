@@ -18,10 +18,13 @@ extends CanvasLayer
 
 func set_score(score):
 	$score_label.text = str(score)
-	$score_shadow_label.text = str(score)
+	$score_label_shadow.text = str(score)
 
 func _ready():
 	pass
 
 func _process(delta):
+	pass
+
+func _on_Button_button_down():
 	pass

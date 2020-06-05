@@ -19,7 +19,7 @@
 extends Area2D
 
 const CollisionLayer = {
-	"obstcales": 1,
+	"obstacles": 1,
 	"walls": 2,	
 }
 
@@ -61,4 +61,6 @@ func _process(delta):
 func _on_Player_area_entered(area):
 	if area.collision_layer == CollisionLayer.walls:
 		switch_direction()
+	if area.collision_layer == CollisionLayer.obstacles:
+		print('hit wall')
 

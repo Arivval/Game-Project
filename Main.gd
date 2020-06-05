@@ -22,6 +22,9 @@ func start_game():
 	score = 0
 	$Timer.start()
 
+func end_game():
+	$Timer.stop()
+
 func _ready():
 	start_game()
 
