@@ -40,7 +40,7 @@ size = 80
 font_data = ExtResource( 3 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 89.7661, 133.624 )
+extents = Vector2( 128, 128 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -294,21 +294,537 @@ wait_time = 0.5
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Obstacle" type="Area2D" parent="Obstacles"]
-position = Vector2( 203.169, -614.258 )
+position = Vector2( 488.104, -49.3305 )
 rotation = 0.785398
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle"]
-position = Vector2( 520, 374 )
 shape = SubResource( 9 )
 
 [node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle"]
-margin_left = 430.0
-margin_top = 240.0
-margin_right = 609.0
-margin_bottom = 508.0
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle2" type="Area2D" parent="Obstacles"]
+position = Vector2( 80.0703, -351.307 )
+rotation = 0.785398
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle2"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle2"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle3" type="Area2D" parent="Obstacles"]
+position = Vector2( 492.151, -699.43 )
+rotation = 0.785398
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle3"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle3"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle4" type="Area2D" parent="Obstacles"]
+position = Vector2( 58.3702, -938.618 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle4"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle4"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle5" type="Area2D" parent="Obstacles"]
+position = Vector2( 438.389, -1372.6 )
+rotation = 0.785398
+scale = Vector2( 2, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle5"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle5"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle7" type="Area2D" parent="Obstacles"]
+position = Vector2( 89.2673, -2128.44 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle7"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle7"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle8" type="Area2D" parent="Obstacles"]
+position = Vector2( 597.081, -2638.61 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle8"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle8"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle9" type="Area2D" parent="Obstacles"]
+position = Vector2( 85.7409, -2751.46 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle9"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle9"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle10" type="Area2D" parent="Obstacles"]
+position = Vector2( -1.74005, -3449.77 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle10"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle10"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle11" type="Area2D" parent="Obstacles"]
+position = Vector2( 811.715, -3850.33 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle11"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle11"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle12" type="Area2D" parent="Obstacles"]
+position = Vector2( -229.022, -4304 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle12"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle12"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle13" type="Area2D" parent="Obstacles"]
+position = Vector2( 815.255, -4535.24 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle13"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle13"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle14" type="Area2D" parent="Obstacles"]
+position = Vector2( -11.2375, -4853.8 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle14"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle14"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle15" type="Area2D" parent="Obstacles"]
+position = Vector2( 827.643, -5025.47 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle15"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle15"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle16" type="Area2D" parent="Obstacles"]
+position = Vector2( -0.618652, -5296.25 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle16"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle16"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle17" type="Area2D" parent="Obstacles"]
+position = Vector2( -174.894, -6518.59 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle17"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle17"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle19" type="Area2D" parent="Obstacles"]
+position = Vector2( -132.232, -6883.04 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle19"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle19"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle20" type="Area2D" parent="Obstacles"]
+position = Vector2( 673.473, -6884.04 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle20"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle20"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle21" type="Area2D" parent="Obstacles"]
+position = Vector2( 87.5458, -7569.47 )
+rotation = 0.785398
+scale = Vector2( 2, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle21"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle21"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle22" type="Area2D" parent="Obstacles"]
+position = Vector2( 385.627, -7742.21 )
+rotation = 0.785398
+scale = Vector2( 2, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle22"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle22"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle23" type="Area2D" parent="Obstacles"]
+position = Vector2( 89.7494, -8116 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle23"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle23"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle24" type="Area2D" parent="Obstacles"]
+position = Vector2( 618.663, -8467.16 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle24"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle24"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle25" type="Area2D" parent="Obstacles"]
+position = Vector2( 89.1434, -8469.07 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle25"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle25"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle26" type="Area2D" parent="Obstacles"]
+position = Vector2( 366.146, -9125.2 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle26"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle26"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle27" type="Area2D" parent="Obstacles"]
+position = Vector2( 262.36, -9745.35 )
+rotation = 0.785398
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle27"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle27"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle18" type="Area2D" parent="Obstacles"]
+position = Vector2( 710.721, -6513.94 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle18"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle18"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle6" type="Area2D" parent="Obstacles"]
+position = Vector2( 438.389, -1372.6 )
+rotation = 0.785398
+scale = Vector2( 2, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle6"]
+shape = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacles/Obstacle6"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
