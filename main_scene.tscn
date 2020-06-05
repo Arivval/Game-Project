@@ -43,6 +43,19 @@ extents = Vector2( 89.7661, 133.624 )
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.228287
+margin_right = 542.228
+margin_bottom = 1200.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 1, 0.439216, 0.439216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="trailing_tail" type="Line2D" parent="."]
 position = Vector2( 276, 892 )
 points = PoolVector2Array( 0.326996, -0.339111, -74.803, 75.7156 )
@@ -72,20 +85,6 @@ limit_left = 542
 limit_right = 542
 smoothing_enabled = true
 smoothing_speed = 7.0
-
-[node name="ColorRect" type="ColorRect" parent="Player/Camera2D"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -271.772
-margin_top = -555.0
-margin_right = 270.228
-margin_bottom = 485.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 1, 0.439216, 0.439216, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ReflectiveWallLeft" type="Area2D" parent="."]
 collision_layer = 2
