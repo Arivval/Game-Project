@@ -58,6 +58,8 @@ func set_end_screen_score(score):
 func show_end_screen():
 	$restart_button.show()
 	$back_button.show()
+	$restart_button2.show()
+	$back_button2.show()
 	$end_game/end_game_text.show()
 	$end_game/end_game_text_shadow.show()
 
@@ -65,6 +67,8 @@ func show_end_screen():
 func hide_end_screen():
 	$restart_button.hide()
 	$back_button.hide()
+	$restart_button2.hide()
+	$back_button2.hide()
 	$end_game/end_game_text.hide()
 	$end_game/end_game_text_shadow.hide()
 
