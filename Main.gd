@@ -23,19 +23,34 @@ var canvas_node
 var player_init_position
 var background_init_position
 var is_story_mode = true
+var score_timer
+var obstacle_spawn_timer
+
+var current_level = 'Level_1_1'
+var current_level_instance
+
+func load_level(level_name):
+	var level_full_path = level_name + '.tscn'
+	var level_to_load = load(level_full_path).instance()
+	current_level_instance = level_to_load
+	add_child(level_to_load)
 
 
 func start_game():
+	load_level(current_level)
 	score = 0
 	canvas_node.hide_start_screen()
 	canvas_node.show_in_game_screen()
 	canvas_node.set_score(score)
-	$Timer.start()
+	randomize()
+	score_timer.start()
 	player_node.start_game()
+	
+	obstacle_spawn_timer.start()
 
 
 func end_game():
-	$Timer.stop()
+	score_timer.stop()
 	player_node.end_game()
 	canvas_node.hide_in_game_screen()
 	canvas_node.set_end_screen_score(score)
@@ -43,12 +58,14 @@ func end_game():
 
 
 func restart_game():
+	current_level_instance.queue_free()
 	player_node.reset_dot_position()
 	canvas_node.hide_end_screen()
 	start_game()
 
 
 func to_main_screen():
+	current_level_instance.queue_free()
 	player_node.reset_dot_position()
 	canvas_node.hide_end_screen()
 	canvas_node.show_start_screen()
@@ -79,6 +96,9 @@ func _ready():
 	background_node = $ColorRect
 	canvas_node = $CanvasLayer
 	
+	score_timer = $Timer
+	obstacle_spawn_timer = $ObstacleSpawnTimer
+	
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
 	
@@ -98,3 +118,5 @@ func _on_Timer_timeout():
 	canvas_node.set_score(score)
 
 
+func _on_ObstacleSpawnTimer_timeout():
+	pass
