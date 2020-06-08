@@ -19,37 +19,91 @@ extends Node2D
 var score
 var player_node
 var background_node
+var canvas_node
 var player_init_position
 var background_init_position
+var is_story_mode = true
+var score_timer
+var obstacle_spawn_timer
+
+var current_level = 'Level_1_1'
+var current_level_instance
+
+var obstacle_factory
+var instantiated_obstacles = []
+
+func load_level(level_name):
+	# we can't have duplicate or overlapping levels
+	unload_current_level()
+	var level_full_path = 'levels/' + level_name + '.tscn'
+	var level_to_load = load(level_full_path).instance()
+	current_level_instance = level_to_load
+	add_child(level_to_load)
 
 
+func unload_current_level():
+	if current_level_instance != null:
+		current_level_instance.queue_free()
+		current_level_instance = null
+
+
+# iterate throught all the instantiated obstacles during game play for
+# endless mode, and free them
+func unload_instantiated_obstacles():
+	for obstacle in instantiated_obstacles:
+		obstacle.queue_free()
+	instantiated_obstacles = []
+	
+	
 func start_game():
+	if is_story_mode:
+		unload_instantiated_obstacles()
+		load_level(current_level)
+	else:
+		unload_current_level()
+		unload_instantiated_obstacles()
+		obstacle_spawn_timer.start()
+	
 	score = 0
-	$CanvasLayer.hide_start_screen()
-	$CanvasLayer.show_in_game_screen()
-	$CanvasLayer.set_score(score)
-	$Timer.start()
-	$Player.start_game()
+	canvas_node.hide_start_screen()
+	canvas_node.show_in_game_screen()
+	canvas_node.set_score(score)
+	randomize()
+	score_timer.start()
+	player_node.start_game()
 
 
 func end_game():
-	$Timer.stop()
-	$Player.end_game()
-	$CanvasLayer.hide_in_game_screen()
-	$CanvasLayer.set_end_screen_score(score)
-	$CanvasLayer.show_end_screen()
+	score_timer.stop()
+	obstacle_spawn_timer.stop()
+	player_node.end_game()
+	canvas_node.hide_in_game_screen()
+	canvas_node.set_end_screen_score(score)
+	canvas_node.show_end_screen()
 
 
 func restart_game():
-	$Player.reset_dot_position()
-	$CanvasLayer.hide_end_screen()
+	player_node.reset_dot_position()
+	canvas_node.hide_end_screen()
 	start_game()
 
 
 func to_main_screen():
-	$Player.reset_dot_position()
-	$CanvasLayer.hide_end_screen()
-	$CanvasLayer.show_start_screen()
+	player_node.reset_dot_position()
+	canvas_node.hide_end_screen()
+	canvas_node.show_start_screen()
+
+
+func enable_story_mode():
+	is_story_mode = true
+	$CanvasLayer/story_mode_label.bbcode_text = '[u]story[/u]'
+	$CanvasLayer/endless_mode_label.bbcode_text = 'endless'
+
+
+func enable_endless_mode():
+	is_story_mode = false
+	$CanvasLayer/story_mode_label.bbcode_text = 'story'
+	$CanvasLayer/endless_mode_label.bbcode_text = '[u]endless[/u]'
 
 
 # since our camera is locked on the player, we also need to move the
@@ -63,9 +117,22 @@ func _ready():
 	# to save time, find node is only executed once
 	player_node = $Player
 	background_node = $ColorRect
+	canvas_node = $CanvasLayer
+	
+	score_timer = $Timer
+	obstacle_spawn_timer = $ObstacleSpawnTimer
 	
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
+	
+	var obstacle_full_path = 'Obstacle.tscn'
+	obstacle_factory = load(obstacle_full_path)
+	
+	# we need to initialize the UI elements to reflect the current mode
+	if is_story_mode: 
+		enable_story_mode() 
+	else: 
+		enable_endless_mode()
 
 
 func _process(delta):
@@ -74,6 +141,15 @@ func _process(delta):
 
 func _on_Timer_timeout():
 	score += 1
-	$CanvasLayer.set_score(score)
+	canvas_node.set_score(score)
 
 
+func _on_ObstacleSpawnTimer_timeout():
+	# we need to spawn a new obstacle with randomized transform and scale
+	var new_obstacle = obstacle_factory.instance()
+	new_obstacle.position.y = player_node.position.y - 1200
+	add_child(new_obstacle)
+	instantiated_obstacles.append(new_obstacle)
+	
+	
+	
