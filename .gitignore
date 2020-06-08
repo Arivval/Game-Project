@@ -18,6 +18,9 @@ data_*/
 # Icon must end with two \r
 Icon
 
+# Android build apks
+*.apk
+
 # Thumbnails
 ._*
 
