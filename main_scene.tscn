@@ -53,8 +53,8 @@ script = ExtResource( 4 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.228287
-margin_right = 542.228
+margin_top = -37.0
+margin_right = 542.0
 margin_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
