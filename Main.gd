@@ -29,6 +29,8 @@ var obstacle_spawn_timer
 var current_level = 'Level_1_1'
 var current_level_instance
 
+var obstacle_factory
+var instantiated_obstacles = []
 
 func load_level(level_name):
 	# we can't have duplicate or overlapping levels
@@ -45,8 +47,23 @@ func unload_current_level():
 		current_level_instance = null
 
 
+# iterate throught all the instantiated obstacles during game play for
+# endless mode, and free them
+func unload_instantiated_obstacles():
+	for obstacle in instantiated_obstacles:
+		obstacle.queue_free()
+	instantiated_obstacles = []
+	
+	
 func start_game():
-	load_level(current_level)
+	if is_story_mode:
+		unload_instantiated_obstacles()
+		load_level(current_level)
+	else:
+		unload_current_level()
+		unload_instantiated_obstacles()
+		obstacle_spawn_timer.start()
+	
 	score = 0
 	canvas_node.hide_start_screen()
 	canvas_node.show_in_game_screen()
@@ -54,12 +71,11 @@ func start_game():
 	randomize()
 	score_timer.start()
 	player_node.start_game()
-	
-	obstacle_spawn_timer.start()
 
 
 func end_game():
 	score_timer.stop()
+	obstacle_spawn_timer.stop()
 	player_node.end_game()
 	canvas_node.hide_in_game_screen()
 	canvas_node.set_end_screen_score(score)
@@ -109,6 +125,9 @@ func _ready():
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
 	
+	var obstacle_full_path = 'Obstacle.tscn'
+	obstacle_factory = load(obstacle_full_path)
+	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
 		enable_story_mode() 
@@ -126,4 +145,11 @@ func _on_Timer_timeout():
 
 
 func _on_ObstacleSpawnTimer_timeout():
-	pass
+	# we need to spawn a new obstacle with randomized transform and scale
+	var new_obstacle = obstacle_factory.instance()
+	new_obstacle.position.y = player_node.position.y - 1200
+	add_child(new_obstacle)
+	instantiated_obstacles.append(new_obstacle)
+	
+	
+	
