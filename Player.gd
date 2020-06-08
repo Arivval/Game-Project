@@ -36,6 +36,7 @@ var started = false
 var initial_position
 var initial_tail_points
 var screen_width
+var player_dot_node
 var player_radius
 
 func start_game():
@@ -52,7 +53,7 @@ func switch_direction():
 	moving_right = !moving_right
 	velocity_vector.x *= -1
 	# since player_dot is acutally a half circle, we need to flip its rotation
-	$player_dot.rotation_degrees *= -1
+	player_dot_node.rotation_degrees *= -1
 
 
 func set_moving_right(condition):
@@ -75,7 +76,7 @@ func reset_dot_position():
 	position = initial_position
 	trailing_tail.points = initial_tail_points
 	moving_right = true
-	$player_dot.rotation_degrees = 45.0
+	player_dot_node.rotation_degrees = 45.0
 
 
 func is_player_out_of_bound():
@@ -97,6 +98,7 @@ func _ready():
 	initial_tail_points = trailing_tail.points
 	screen_width = get_viewport_rect().size.x
 	player_radius = $CollisionShape2D.shape.radius
+	player_dot_node = $player_dot
 
 
 func _process(delta):

@@ -51,11 +51,13 @@ func show_start_screen():
 func hide_in_game_screen():
 	$score_label.hide()
 	$score_label_shadow.hide()
+	$tap_button.hide()
 
 
 func show_in_game_screen():
 	$score_label.show()
 	$score_label_shadow.show()
+	$tap_button.show()
 
 
 func set_end_screen_score(score):

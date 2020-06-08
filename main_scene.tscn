@@ -203,6 +203,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="tap_button" type="Button" parent="CanvasLayer"]
+visible = false
+margin_left = -1.0
+margin_top = -4.0
+margin_right = 544.0
+margin_bottom = 1203.0
+focus_mode = 0
+custom_fonts/font = SubResource( 7 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button_text" type="Label" parent="CanvasLayer/tap_button"]
+margin_left = -0.552674
+margin_top = 453.861
+margin_right = 536.447
+margin_bottom = 491.861
+custom_fonts/font = SubResource( 8 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="end_game" type="Node" parent="CanvasLayer"]
 
 [node name="end_game_text_shadow" type="Label" parent="CanvasLayer/end_game"]
@@ -360,6 +386,7 @@ wait_time = 0.5
 [connection signal="start_signal" from="CanvasLayer" to="." method="start_game"]
 [connection signal="story_signal" from="CanvasLayer" to="." method="enable_story_mode"]
 [connection signal="button_down" from="CanvasLayer/start_button" to="CanvasLayer" method="_on_start_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/tap_button" to="Player" method="switch_direction"]
 [connection signal="pressed" from="CanvasLayer/restart_button2" to="CanvasLayer" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/restart_button" to="CanvasLayer" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/back_button2" to="CanvasLayer" method="_on_back_button_pressed"]
