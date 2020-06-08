@@ -30,11 +30,17 @@ var current_level = 'Level_1_1'
 var current_level_instance
 
 func load_level(level_name):
+	unload_current_level()
 	var level_full_path = level_name + '.tscn'
 	var level_to_load = load(level_full_path).instance()
 	current_level_instance = level_to_load
 	add_child(level_to_load)
 
+
+func unload_current_level():
+	if current_level_instance != null:
+		current_level_instance.queue_free()
+		current_level_instance = null
 
 func start_game():
 	load_level(current_level)
@@ -58,14 +64,12 @@ func end_game():
 
 
 func restart_game():
-	current_level_instance.queue_free()
 	player_node.reset_dot_position()
 	canvas_node.hide_end_screen()
 	start_game()
 
 
 func to_main_screen():
-	current_level_instance.queue_free()
 	player_node.reset_dot_position()
 	canvas_node.hide_end_screen()
 	canvas_node.show_start_screen()
