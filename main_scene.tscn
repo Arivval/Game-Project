@@ -376,7 +376,6 @@ __meta__ = {
 wait_time = 0.5
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="."]
-wait_time = 0.5
 [connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
 [connection signal="end_signal" from="Player" to="." method="end_game"]

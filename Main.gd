@@ -148,6 +148,10 @@ func _on_ObstacleSpawnTimer_timeout():
 	# we need to spawn a new obstacle with randomized transform and scale
 	var new_obstacle = obstacle_factory.instance()
 	new_obstacle.position.y = player_node.position.y - 1200
+	new_obstacle.position.x = randi() % 800 - 100
+	# new_obstacle.scale.x = rand_range(0.7, 1.5)
+	# new_obstacle.scale.y = rand_range(0.7, 1.5)
+	# obstacle_spawn_timer.wait_time = rand_range(0.7, 1.2)
 	add_child(new_obstacle)
 	instantiated_obstacles.append(new_obstacle)
 	
