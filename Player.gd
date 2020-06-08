@@ -50,6 +50,7 @@ func end_game():
 
 
 func switch_direction():
+	Input.vibrate_handheld(10)
 	moving_right = !moving_right
 	velocity_vector.x *= -1
 	# since player_dot is acutally a half circle, we need to flip its rotation
@@ -109,8 +110,11 @@ func _process(delta):
 
 
 # handle collision events with wall/obstacles
+# in order to let vibration feature work, need to enable vibrate permission	
+# in export settings 
 func _on_Player_area_entered(area):
 	if area.collision_layer == CollisionLayer.obstacles:
+		Input.vibrate_handheld(400)
 		emit_signal('end_signal')
 
 
