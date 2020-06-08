@@ -21,6 +21,7 @@ var player_node
 var background_node
 var player_init_position
 var background_init_position
+var is_story_mode = true
 
 
 func start_game():
@@ -52,6 +53,18 @@ func to_main_screen():
 	$CanvasLayer.show_start_screen()
 
 
+func enable_story_mode():
+	is_story_mode = true
+	$CanvasLayer/story_mode_label.bbcode_text = '[u]story[/u]'
+	$CanvasLayer/endless_mode_label.bbcode_text = 'endless'
+
+
+func enable_endless_mode():
+	is_story_mode = false
+	$CanvasLayer/story_mode_label.bbcode_text = 'story'
+	$CanvasLayer/endless_mode_label.bbcode_text = '[u]endless[/u]'
+
+
 # since our camera is locked on the player, we also need to move the
 # background along with the player to make the map seem infinite
 func sync_player_background_y():
@@ -66,6 +79,12 @@ func _ready():
 	
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
+	
+	# we need to initialize the UI elements to reflect the current mode
+	if is_story_mode: 
+		enable_story_mode() 
+	else: 
+		enable_endless_mode()
 
 
 func _process(delta):

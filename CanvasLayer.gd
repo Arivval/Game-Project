@@ -19,7 +19,8 @@ extends CanvasLayer
 signal start_signal
 signal restart_signal
 signal back_signal
-
+signal story_signal
+signal endless_signal
 
 
 func set_score(score):
@@ -31,12 +32,20 @@ func hide_start_screen():
 	$title/title_text.hide()
 	$title/title_text_shadow.hide()
 	$start_button.hide()
+	$story_mode_label.hide()
+	$story_mode_selector.hide()
+	$endless_mode_label.hide()
+	$endless_mode_selector.hide()
 
 
 func show_start_screen():
 	$title/title_text.show()
 	$title/title_text_shadow.show()
 	$start_button.show()
+	$story_mode_label.show()
+	$story_mode_selector.show()
+	$endless_mode_label.show()
+	$endless_mode_selector.show()
 
 
 func hide_in_game_screen():
@@ -92,3 +101,10 @@ func _on_restart_button_pressed():
 func _on_back_button_pressed():
 	emit_signal('back_signal')
 
+
+func _on_story_mode_selector_pressed():
+	emit_signal('story_signal')
+
+
+func _on_endless_mode_selector_pressed():
+	emit_signal('endless_signal')
