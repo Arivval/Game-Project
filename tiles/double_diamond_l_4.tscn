@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 128, 128 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Obstacle" type="Area2D" parent="."]
+position = Vector2( 0.137985, -506.88 )
+rotation = 0.785398
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacle"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle2" type="Area2D" parent="."]
+position = Vector2( 360.783, -180.729 )
+rotation = 0.785398
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacle2"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="height" type="Area2D" parent="."]
+position = Vector2( 0, -687.823 )
