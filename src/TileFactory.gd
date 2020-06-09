@@ -81,3 +81,4 @@ func _on_EntryVisibilityNotifier2D_screen_entered():
 func _on_ExitVisibilityNotifier2D_screen_exited():
 	queue_free()
 	parent_node.instantiated_obstacles.erase(self)
+

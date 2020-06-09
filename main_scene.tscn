@@ -192,10 +192,10 @@ __meta__ = {
 }
 
 [node name="button_text" type="Label" parent="CanvasLayer/start_button"]
-margin_left = -0.552674
-margin_top = 453.861
+margin_left = -0.553
+margin_top = 495.0
 margin_right = 536.447
-margin_bottom = 491.861
+margin_bottom = 533.0
 custom_fonts/font = SubResource( 7 )
 text = "Tap to Start"
 align = 1
@@ -262,9 +262,9 @@ __meta__ = {
 [node name="restart_button2" type="Button" parent="CanvasLayer"]
 visible = false
 margin_left = 336.581
-margin_top = 565.515
+margin_top = 750.0
 margin_right = 548.581
-margin_bottom = 772.515
+margin_bottom = 957.0
 rect_scale = Vector2( 0.45, 0.45 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -277,9 +277,9 @@ __meta__ = {
 [node name="restart_button" type="Button" parent="CanvasLayer"]
 visible = false
 margin_left = 338.581
-margin_top = 562.515
+margin_top = 750.0
 margin_right = 550.581
-margin_bottom = 769.515
+margin_bottom = 957.0
 rect_scale = Vector2( 0.45, 0.45 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -292,9 +292,9 @@ __meta__ = {
 [node name="back_button2" type="Button" parent="CanvasLayer"]
 visible = false
 margin_left = 113.425
-margin_top = 570.833
+margin_top = 750.0
 margin_right = 325.425
-margin_bottom = 777.833
+margin_bottom = 957.0
 rect_scale = Vector2( 0.4, 0.4 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -307,9 +307,9 @@ __meta__ = {
 [node name="back_button" type="Button" parent="CanvasLayer"]
 visible = false
 margin_left = 115.425
-margin_top = 567.833
+margin_top = 750.0
 margin_right = 327.425
-margin_bottom = 774.833
+margin_bottom = 957.0
 rect_scale = Vector2( 0.4, 0.4 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -368,6 +368,13 @@ focus_mode = 0
 custom_fonts/font = SubResource( 10 )
 enabled_focus_mode = 0
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+margin_right = 12.0
+margin_bottom = 12.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
