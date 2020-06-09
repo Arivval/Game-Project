@@ -24,7 +24,7 @@ extends Node2D
 
 
 
-var tile_names = ['double_diamond_l_1', 'double_diamond_l_2', 
+var tile_names = ['double_diamond_l_1', 'double_diamond_l_2',
 'double_diamond_l_3', 'double_diamond_l_4', 'double_diamond_r_1', 
 'double_diamond_r_2', 'double_diamond_r_3', 'double_diamond_r_4',
 'single_diamond_l_1', 'single_diamond_l_2', 'single_diamond_l_3',

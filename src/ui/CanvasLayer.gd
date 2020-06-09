@@ -21,6 +21,7 @@ signal restart_signal
 signal back_signal
 signal story_signal
 signal endless_signal
+signal level_select_signal
 
 
 func set_score(score):
@@ -106,6 +107,7 @@ func _on_back_button_pressed():
 
 func _on_story_mode_selector_pressed():
 	emit_signal('story_signal')
+	emit_signal('level_select_signal')
 
 
 func _on_endless_mode_selector_pressed():
