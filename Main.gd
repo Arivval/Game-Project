@@ -24,7 +24,6 @@ var player_init_position
 var background_init_position
 var is_story_mode = true
 var score_timer
-var obstacle_spawn_timer
 
 var current_level = 'Level_1_1'
 var current_level_instance
@@ -50,6 +49,8 @@ func unload_current_level():
 # iterate throught all the instantiated obstacles during game play for
 # endless mode, and free them
 func unload_instantiated_obstacles():
+	print('unload!')
+	print(instantiated_obstacles)
 	for obstacle in instantiated_obstacles:
 		obstacle.queue_free()
 	instantiated_obstacles = []
@@ -60,9 +61,11 @@ func start_game():
 		unload_instantiated_obstacles()
 		load_level(current_level)
 	else:
+		print('here restart!')
 		unload_current_level()
 		unload_instantiated_obstacles()
-		obstacle_spawn_timer.start()
+		var tile_factory = load('TileFactory.tscn').instance()
+		add_child(tile_factory)
 	
 	score = 0
 	canvas_node.hide_start_screen()
@@ -75,7 +78,6 @@ func start_game():
 
 func end_game():
 	score_timer.stop()
-	obstacle_spawn_timer.stop()
 	player_node.end_game()
 	canvas_node.hide_in_game_screen()
 	canvas_node.set_end_screen_score(score)
@@ -120,7 +122,6 @@ func _ready():
 	canvas_node = $CanvasLayer
 	
 	score_timer = $Timer
-	obstacle_spawn_timer = $ObstacleSpawnTimer
 	
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
@@ -144,16 +145,5 @@ func _on_Timer_timeout():
 	canvas_node.set_score(score)
 
 
-func _on_ObstacleSpawnTimer_timeout():
-	# we need to spawn a new obstacle with randomized transform and scale
-	var new_obstacle = obstacle_factory.instance()
-	new_obstacle.position.y = player_node.position.y - 1200
-	new_obstacle.position.x = randi() % 600
-	# new_obstacle.scale.x = rand_range(0.7, 1.5)
-	# new_obstacle.scale.y = rand_range(0.7, 1.5)
-	# obstacle_spawn_timer.wait_time = rand_range(0.7, 1.2)
-	add_child(new_obstacle)
-	instantiated_obstacles.append(new_obstacle)
-	
 	
 	
