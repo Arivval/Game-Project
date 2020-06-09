@@ -6,8 +6,9 @@ extents = Vector2( 128, 128 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Obstacle" type="Area2D" parent="."]
-position = Vector2( 62.1358, -182.827 )
+position = Vector2( -215, -1.185 )
 rotation = 0.785398
+scale = Vector2( 2, 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -24,17 +25,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="entry_l" type="Node2D" parent="."]
-position = Vector2( 61.7723, -0.372986 )
+[node name="Obstacle2" type="Area2D" parent="."]
+position = Vector2( 755, 0 )
+rotation = 0.785398
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="entry_r" type="Node2D" parent="."]
-position = Vector2( 540, 4 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+shape = SubResource( 1 )
 
-[node name="exit_l" type="Node2D" parent="."]
-position = Vector2( 63.5543, -355.125 )
-
-[node name="exit_r" type="Node2D" parent="."]
-position = Vector2( 540, -356 )
+[node name="ColorRect" type="ColorRect" parent="Obstacle2"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="height" type="Area2D" parent="."]
-position = Vector2( 0, -360 )
+position = Vector2( 0, -838.823 )

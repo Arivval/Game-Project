@@ -23,15 +23,20 @@
 extends Node2D
 
 
+
 var tile_names = ['double_diamond_l_1', 'double_diamond_l_2', 
 'double_diamond_l_3', 'double_diamond_l_4', 'double_diamond_r_1', 
 'double_diamond_r_2', 'double_diamond_r_3', 'double_diamond_r_4',
 'single_diamond_l_1', 'single_diamond_l_2', 'single_diamond_l_3',
-'single_diamond_r_1', 'single_diamond_r_2', 'single_diamond_r_3']
+'single_diamond_r_1', 'single_diamond_r_2', 'single_diamond_r_3',
+'lambda_r_1', 'lambda_r_2', 'lambda_r_3',
+'lambda_l_1', 'lambda_l_2', 'lambda_l_3',
+'congested_1', 'congested_2']
 
-var tile_height = 200
+
 var parent_node
 var instantiated = false
+var tile_height = -200
 
 
 func _ready():
@@ -43,21 +48,25 @@ func _process(delta):
 
 
 func randomly_load_next_tile():
+	# create base tile and randomly and randomly select obstacles
 	var next_tile_name = tile_names[randi()%len(tile_names)]
 	next_tile_name = 'tiles/' + next_tile_name + '.tscn'
 	var next_tile_base = load('TileFactory.tscn').instance()
 	var next_tile_obstacle = load(next_tile_name).instance()
 
+	# the position of the next tile needs to be above the current tile
 	next_tile_base.add_child(next_tile_obstacle)
-	# print(next_tile_name, next_tile_obstacle)
-	# next_tile_base.tile_height = next_tile_obstacle.get_node('Obstacle').position.y
-	# print(next_tile_base.tile_height)
-	next_tile_base.tile_height = 400
-	next_tile_base.position.y = position.y - 1000
 	
+	var next_tile_height = next_tile_obstacle.get_node('height').position.y
+	next_tile_base.tile_height = next_tile_height
+
 	parent_node.add_child(next_tile_base)
+	
+	var buffer_zone_height = 0
+	next_tile_base.position.y = (position.y + tile_height - 
+		buffer_zone_height)
 	parent_node.instantiated_obstacles.append(next_tile_base)
-	print(parent_node.instantiated_obstacles)
+
 
 # whenever a tile enters the screen, we need to randomly select and append
 # the next tile

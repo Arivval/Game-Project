@@ -6,7 +6,7 @@ extents = Vector2( 128, 128 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Obstacle" type="Area2D" parent="."]
-position = Vector2( 0, -344 )
+position = Vector2( 0.137985, -554.88 )
 rotation = 0.785398
 __meta__ = {
 "_edit_group_": true
@@ -25,7 +25,7 @@ __meta__ = {
 }
 
 [node name="Obstacle2" type="Area2D" parent="."]
-position = Vector2( 338, 0 )
+position = Vector2( 404.783, -180.729 )
 rotation = 0.785398
 __meta__ = {
 "_edit_group_": true
@@ -43,13 +43,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="entry_left" type="Node2D" parent="."]
-position = Vector2( 181, -344 )
-
-[node name="exit_left" type="Node2D" parent="."]
-
-[node name="exit_right" type="Node2D" parent="."]
-position = Vector2( 155.517, 0 )
-
-[node name="entry_right" type="Node2D" parent="."]
-position = Vector2( 490.395, -344 )
+[node name="height" type="Area2D" parent="."]
+position = Vector2( 0, -735.823 )

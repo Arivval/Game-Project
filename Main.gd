@@ -49,8 +49,6 @@ func unload_current_level():
 # iterate throught all the instantiated obstacles during game play for
 # endless mode, and free them
 func unload_instantiated_obstacles():
-	print('unload!')
-	print(instantiated_obstacles)
 	for obstacle in instantiated_obstacles:
 		obstacle.queue_free()
 	instantiated_obstacles = []
@@ -61,7 +59,6 @@ func start_game():
 		unload_instantiated_obstacles()
 		load_level(current_level)
 	else:
-		print('here restart!')
 		unload_current_level()
 		unload_instantiated_obstacles()
 		var tile_factory = load('TileFactory.tscn').instance()

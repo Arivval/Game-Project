@@ -35,3 +35,6 @@ position = Vector2( -0.640533, -363.501 )
 
 [node name="exit_r" type="Node2D" parent="."]
 position = Vector2( 540, -362 )
+
+[node name="height" type="Area2D" parent="."]
+position = Vector2( 0, -360 )
