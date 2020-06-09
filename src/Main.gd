@@ -20,6 +20,7 @@ var score
 var player_node
 var background_node
 var canvas_node
+var level_select_node = null
 var player_init_position
 var background_init_position
 var is_story_mode = true
@@ -30,6 +31,10 @@ var current_level_instance
 
 var obstacle_factory
 var instantiated_obstacles = []
+
+var level_name_map = { 'Level_1_1': 'level 1-1', 'Level_1_2': 'level 1-2',}
+var level_name_reverse_map = { 'level 1-1': 'Level_1_1', 
+							'level 1-2': 'Level_1_2',}
 
 func load_level(level_name):
 	# we can't have duplicate or overlapping levels
@@ -93,15 +98,36 @@ func to_main_screen():
 	canvas_node.show_start_screen()
 
 
+func load_level_select_screen():
+	level_select_node = load('levels/LevelSelector.tscn').instance()
+	add_child(level_select_node)
+	unload_current_level()
+	unload_instantiated_obstacles()
+	canvas_node.hide_start_screen()
+	# now move camera to the level select scene
+	player_node.hide()
+	player_node.position.y = 20
+
+
+func set_level(level_name):
+	current_level = level_name_reverse_map[level_name.to_lower()]
+	level_select_node.queue_free()
+	player_node.show()
+	player_node.position.y = 892
+	canvas_node.show_start_screen()
+	enable_story_mode()
+	
+
 func enable_story_mode():
 	is_story_mode = true
-	$CanvasLayer/story_mode_label.bbcode_text = '[u]story[/u]'
+	$CanvasLayer/story_mode_label.bbcode_text = '[u]' + \
+		level_name_map[current_level] + '[/u]'
 	$CanvasLayer/endless_mode_label.bbcode_text = 'endless'
 
 
 func enable_endless_mode():
 	is_story_mode = false
-	$CanvasLayer/story_mode_label.bbcode_text = 'story'
+	$CanvasLayer/story_mode_label.bbcode_text = level_name_map[current_level]
 	$CanvasLayer/endless_mode_label.bbcode_text = '[u]endless[/u]'
 
 
@@ -142,5 +168,3 @@ func _on_Timer_timeout():
 	canvas_node.set_score(score)
 
 
-	
-	
