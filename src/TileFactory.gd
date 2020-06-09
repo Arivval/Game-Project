@@ -48,7 +48,7 @@ func _process(delta):
 
 
 func randomly_load_next_tile():
-	# create base tile and randomly and randomly select obstacles
+	# create base tile and randomly select instantiate obstacles
 	var next_tile_name = tile_names[randi()%len(tile_names)]
 	next_tile_name = 'tiles/' + next_tile_name + '.tscn'
 	var next_tile_base = load('TileFactory.tscn').instance()
@@ -73,7 +73,7 @@ func randomly_load_next_tile():
 func _on_EntryVisibilityNotifier2D_screen_entered():
 	if !instantiated:
 		randomly_load_next_tile()
-		instantiated = true # the call should only be called once
+		instantiated = true # this call should only be called once
 
 
 # whnever a tile exits the screen, we need to queue_free it in order to save
