@@ -302,6 +302,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FinishLine" type="Area2D" parent="."]
+position = Vector2( 469.226, -5894.23 )
+scale = Vector2( 10, 0.1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
+shape = SubResource( 1 )
+
 [node name="Obstacle17" type="Area2D" parent="."]
 position = Vector2( -174.894, -6518.59 )
 rotation = 0.785398

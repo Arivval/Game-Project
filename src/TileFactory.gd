@@ -51,7 +51,7 @@ func randomly_load_next_tile():
 	# create base tile and randomly select instantiate obstacles
 	var next_tile_name = tile_names[randi()%len(tile_names)]
 	next_tile_name = 'tiles/' + next_tile_name + '.tscn'
-	var next_tile_base = load('TileFactory.tscn').instance()
+	var next_tile_base = load('tiles/TileFactory.tscn').instance()
 	var next_tile_obstacle = load(next_tile_name).instance()
 
 	# the position of the next tile needs to be above the current tile

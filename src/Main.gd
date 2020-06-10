@@ -29,7 +29,6 @@ var score_timer
 var current_level = 'Level_1_1'
 var current_level_instance
 
-var obstacle_factory
 var instantiated_obstacles = []
 
 var level_name_map = { 'Level_1_1': 'level 1-1', 'Level_1_2': 'level 1-2',}
@@ -66,7 +65,7 @@ func start_game():
 	else:
 		unload_current_level()
 		unload_instantiated_obstacles()
-		var tile_factory = load('TileFactory.tscn').instance()
+		var tile_factory = load('tiles/TileFactory.tscn').instance()
 		add_child(tile_factory)
 	
 	score = 0
@@ -148,9 +147,6 @@ func _ready():
 	
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
-	
-	var obstacle_full_path = 'Obstacle.tscn'
-	obstacle_factory = load(obstacle_full_path)
 	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
