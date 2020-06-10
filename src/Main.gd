@@ -21,6 +21,7 @@ var player_node
 var background_node
 var canvas_node
 var level_select_node = null
+var camera_node
 var player_init_position
 var background_init_position
 var is_story_mode = true
@@ -29,7 +30,6 @@ var score_timer
 var current_level = 'Level_1_1'
 var current_level_instance
 
-var obstacle_factory
 var instantiated_obstacles = []
 
 var level_name_map = { 'Level_1_1': 'level 1-1', 'Level_1_2': 'level 1-2',}
@@ -63,11 +63,13 @@ func start_game():
 	if is_story_mode:
 		unload_instantiated_obstacles()
 		load_level(current_level)
+		canvas_node.hide_score_counter()
 	else:
 		unload_current_level()
 		unload_instantiated_obstacles()
-		var tile_factory = load('TileFactory.tscn').instance()
+		var tile_factory = load('tiles/TileFactory.tscn').instance()
 		add_child(tile_factory)
+		canvas_node.show_score_counter()
 	
 	score = 0
 	canvas_node.hide_start_screen()
@@ -84,6 +86,19 @@ func end_game():
 	canvas_node.hide_in_game_screen()
 	canvas_node.set_end_screen_score(score)
 	canvas_node.show_end_screen()
+
+
+func finished_level():
+	camera_node.unlock_camera()
+	canvas_node.show_level_complete_screen()
+
+
+func proceed_to_next_level():
+	camera_node.lock_camera()
+	canvas_node.hide_level_complete_screen()
+	player_node.end_game()
+	canvas_node.hide_in_game_screen()
+	to_main_screen()
 
 
 func restart_game():
@@ -143,14 +158,12 @@ func _ready():
 	player_node = $Player
 	background_node = $ColorRect
 	canvas_node = $CanvasLayer
+	camera_node = player_node.find_node('Camera2D')
 	
 	score_timer = $Timer
 	
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
-	
-	var obstacle_full_path = 'Obstacle.tscn'
-	obstacle_factory = load(obstacle_full_path)
 	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
@@ -166,5 +179,4 @@ func _process(delta):
 func _on_Timer_timeout():
 	score += 1
 	canvas_node.set_score(score)
-
 

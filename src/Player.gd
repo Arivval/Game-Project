@@ -19,11 +19,12 @@
 extends Area2D
 
 signal end_signal
+signal finish_signal
+
 
 const CollisionLayer = {
 	"obstacles": 1,
-	"left_wall": 2,
-	"right_wall": 4,	
+	"finish_line": 2,
 }
 
 var trailing_tail
@@ -116,5 +117,7 @@ func _on_Player_area_entered(area):
 	if area.collision_layer == CollisionLayer.obstacles:
 		Input.vibrate_handheld(400)
 		emit_signal('end_signal')
+	if area.collision_layer == CollisionLayer.finish_line:
+		emit_signal('finish_signal')
 
 

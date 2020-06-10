@@ -22,6 +22,7 @@ signal back_signal
 signal story_signal
 signal endless_signal
 signal level_select_signal
+signal next_signal
 
 
 func set_score(score):
@@ -56,8 +57,6 @@ func hide_in_game_screen():
 
 
 func show_in_game_screen():
-	$score_label.show()
-	$score_label_shadow.show()
 	$tap_button.show()
 
 
@@ -85,6 +84,30 @@ func hide_end_screen():
 	$end_game/end_game_text_shadow.hide()
 
 
+func show_level_complete_screen():
+	$next_button.show()
+	$next_button2.show()
+	$level_complete_text.show()
+	$level_complete_text_shadow.show()
+
+
+func hide_level_complete_screen():
+	$next_button.hide()
+	$next_button2.hide()
+	$level_complete_text.hide()
+	$level_complete_text_shadow.hide()
+
+
+func show_score_counter():
+	$score_label.show()
+	$score_label_shadow.show()
+
+
+func hide_score_counter():
+	$score_label.hide()
+	$score_label_shadow.hide()
+
+
 func _ready():
 	pass
 
@@ -94,21 +117,31 @@ func _process(delta):
 
 
 func _on_start_button_button_down():
+	Input.vibrate_handheld(10)
 	emit_signal('start_signal')
 
 
 func _on_restart_button_pressed():
+	Input.vibrate_handheld(10)
 	emit_signal('restart_signal')
 
 
 func _on_back_button_pressed():
+	Input.vibrate_handheld(10)
 	emit_signal('back_signal')
 
 
 func _on_story_mode_selector_pressed():
+	Input.vibrate_handheld(10)
 	emit_signal('story_signal')
 	emit_signal('level_select_signal')
 
 
 func _on_endless_mode_selector_pressed():
+	Input.vibrate_handheld(10)
 	emit_signal('endless_signal')
+
+
+func _on_next_button_pressed():
+	Input.vibrate_handheld(10)
+	emit_signal('next_signal')

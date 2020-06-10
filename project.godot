@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Game Project"
+config/name="Dot Go!"
 run/main_scene="res://main_scene.tscn"
 config/icon="res://icon.png"
 

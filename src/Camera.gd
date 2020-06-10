@@ -14,21 +14,21 @@
 	limitations under the License.
 """
 
-extends Button
 
-
-# this button can also be the DLC button, in which case we shoule not
-# treat it as a level selector
-var is_level_select_button = true
+extends Camera2D
 
 
 func _ready():
-	if self.text == 'Get More Levels':
-		is_level_select_button = false
+	pass
 
 
-func _on_Button_pressed():
-	Input.vibrate_handheld(10)
-	if is_level_select_button:
-		var main_node = get_node('/root/Node2D')
-		main_node.set_level(self.text)
+# set the top and bottom limit of the camera to its current y position
+# so that the camera can not lock on the player anymore
+func unlock_camera():
+	self.limit_bottom = global_position.y - 510
+	self.limit_top = global_position.y - 510
+ 
+
+func lock_camera():
+	self.limit_bottom = 10000000
+	self.limit_top = -10000000

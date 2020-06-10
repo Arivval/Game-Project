@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://art/player_dot_half.png" type="Texture" id=1]
 [ext_resource path="res://src/Player.gd" type="Script" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://art/restart_button_white.png" type="Texture" id=7]
 [ext_resource path="res://art/restart_button_grey.png" type="Texture" id=8]
 [ext_resource path="res://art/exit_button_grey.png" type="Texture" id=9]
+[ext_resource path="res://src/Camera.gd" type="Script" id=10]
+[ext_resource path="res://art/next_button_white.png" type="Texture" id=11]
+[ext_resource path="res://art/next_button_grey.png" type="Texture" id=12]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 1, 0.992157, 1, 0, 0.8, 0.847059, 0 )
@@ -16,15 +19,16 @@ colors = PoolColorArray( 0, 1, 0.992157, 1, 0, 0.8, 0.847059, 0 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 22.5923
 
-[sub_resource type="SegmentShape2D" id=3]
-b = Vector2( 0.0160542, 1031 )
-
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 120
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 96
+font_data = ExtResource( 3 )
+
 [sub_resource type="DynamicFont" id=5]
-size = 128
+size = 32
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=6]
@@ -32,18 +36,14 @@ size = 32
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 32
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=8]
 size = 80
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=8]
 size = 48
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=9]
 size = 48
 font_data = ExtResource( 3 )
 
@@ -92,31 +92,7 @@ limit_left = 542
 limit_right = 542
 smoothing_enabled = true
 smoothing_speed = 7.0
-
-[node name="ReflectiveWallLeft" type="Area2D" parent="."]
-collision_layer = 2
-
-[node name="Line2D" type="Line2D" parent="ReflectiveWallLeft"]
-points = PoolVector2Array( 0.00267792, -0.00313663, 0.0655155, 1030.99 )
-width = 1.0
-default_color = Color( 0.4, 0.501961, 1, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ReflectiveWallLeft"]
-shape = SubResource( 3 )
-one_way_collision_margin = 0.0
-
-[node name="ReflectiveWallRight" type="Area2D" parent="."]
-position = Vector2( 540, 0 )
-collision_layer = 2
-
-[node name="Line2D" type="Line2D" parent="ReflectiveWallRight"]
-points = PoolVector2Array( 0.00267792, -0.00313663, 0.0655155, 1030.99 )
-width = 1.0
-default_color = Color( 1, 1, 1, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ReflectiveWallRight"]
-shape = SubResource( 3 )
-one_way_collision_margin = 0.0
+script = ExtResource( 10 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource( 5 )
@@ -127,7 +103,7 @@ margin_left = -1.56128
 margin_top = 43.929
 margin_right = 537.439
 margin_bottom = 264.929
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
 text = "0"
 align = 1
@@ -142,10 +118,37 @@ margin_left = 1.43872
 margin_top = 41.929
 margin_right = 540.439
 margin_bottom = 262.929
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level_complete_text_shadow" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 2.03784
+margin_top = 150.868
+margin_right = 539.038
+margin_bottom = 301.868
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
+text = "Level Up!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level_complete_text" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 4.03784
+margin_top = 148.868
+margin_right = 541.038
+margin_bottom = 299.868
+custom_fonts/font = SubResource( 4 )
+text = "Level Up!"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -157,7 +160,7 @@ margin_left = 0.344162
 margin_top = 157.656
 margin_right = 537.344
 margin_bottom = 308.656
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
 text = "Dot Go!"
 align = 1
@@ -170,7 +173,7 @@ margin_left = 2.0
 margin_top = 156.0
 margin_right = 539.0
 margin_bottom = 307.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Dot Go!"
 align = 1
 __meta__ = {
@@ -183,7 +186,7 @@ margin_top = 302.0
 margin_right = 537.0
 margin_bottom = 980.0
 focus_mode = 0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
 flat = true
@@ -196,7 +199,7 @@ margin_left = -0.553
 margin_top = 495.0
 margin_right = 536.447
 margin_bottom = 533.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "Tap to Start"
 align = 1
 __meta__ = {
@@ -210,7 +213,7 @@ margin_top = -4.0
 margin_right = 544.0
 margin_bottom = 1203.0
 focus_mode = 0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
 flat = true
@@ -223,7 +226,7 @@ margin_left = -0.552674
 margin_top = 453.861
 margin_right = 536.447
 margin_bottom = 491.861
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -237,7 +240,7 @@ margin_left = -1.0
 margin_top = 81.4905
 margin_right = 540.0
 margin_bottom = 420.491
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.494118, 0.494118, 0.494118, 1 )
 text = "Score: 0"
 align = 1
@@ -251,7 +254,7 @@ visible = false
 margin_top = 79.4905
 margin_right = 541.0
 margin_bottom = 418.491
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Score: 0"
 align = 1
 valign = 1
@@ -304,6 +307,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="next_button2" type="Button" parent="CanvasLayer"]
+visible = false
+margin_left = 230.305
+margin_top = 727.245
+margin_right = 442.305
+margin_bottom = 934.245
+rect_scale = Vector2( 0.4, 0.4 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 12 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="next_button" type="Button" parent="CanvasLayer"]
+visible = false
+margin_left = 232.305
+margin_top = 724.245
+margin_right = 444.305
+margin_bottom = 931.245
+rect_scale = Vector2( 0.4, 0.4 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 11 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="back_button" type="Button" parent="CanvasLayer"]
 visible = false
 margin_left = 115.425
@@ -324,7 +357,7 @@ margin_left = 77.0
 margin_top = 664.0
 margin_right = 247.0
 margin_bottom = 722.0
-custom_fonts/normal_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 bbcode_text = "[u]level 1-1[/u]"
 text = "level 1-1"
@@ -337,7 +370,7 @@ margin_left = 302.754
 margin_top = 664.0
 margin_right = 463.754
 margin_bottom = 722.0
-custom_fonts/normal_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 bbcode_text = "[u]endless[/u]"
 text = "endless"
@@ -351,7 +384,7 @@ margin_top = 662.0
 margin_right = 245.0
 margin_bottom = 725.0
 focus_mode = 0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 9 )
 enabled_focus_mode = 0
 text = " "
 flat = true
@@ -365,7 +398,7 @@ margin_top = 663.017
 margin_right = 466.811
 margin_bottom = 726.017
 focus_mode = 0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 9 )
 enabled_focus_mode = 0
 flat = true
 __meta__ = {
@@ -377,9 +410,11 @@ wait_time = 0.5
 [connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
 [connection signal="end_signal" from="Player" to="." method="end_game"]
+[connection signal="finish_signal" from="Player" to="." method="finished_level"]
 [connection signal="back_signal" from="CanvasLayer" to="." method="to_main_screen"]
 [connection signal="endless_signal" from="CanvasLayer" to="." method="enable_endless_mode"]
 [connection signal="level_select_signal" from="CanvasLayer" to="." method="load_level_select_screen"]
+[connection signal="next_signal" from="CanvasLayer" to="." method="proceed_to_next_level"]
 [connection signal="restart_signal" from="CanvasLayer" to="." method="restart_game"]
 [connection signal="start_signal" from="CanvasLayer" to="." method="start_game"]
 [connection signal="story_signal" from="CanvasLayer" to="." method="enable_story_mode"]
@@ -388,6 +423,7 @@ wait_time = 0.5
 [connection signal="pressed" from="CanvasLayer/restart_button2" to="CanvasLayer" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/restart_button" to="CanvasLayer" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/back_button2" to="CanvasLayer" method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/next_button" to="CanvasLayer" method="_on_next_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/back_button" to="CanvasLayer" method="_on_back_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/story_mode_selector" to="CanvasLayer" method="_on_story_mode_selector_pressed"]
 [connection signal="pressed" from="CanvasLayer/endless_mode_selector" to="CanvasLayer" method="_on_endless_mode_selector_pressed"]
