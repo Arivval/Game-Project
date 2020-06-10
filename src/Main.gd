@@ -165,12 +165,14 @@ func _ready():
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
 	
+	# load packed scene pck file
+	ProjectSettings.load_resource_pack('dlc.pck')
+	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
 		enable_story_mode() 
 	else: 
 		enable_endless_mode()
-
 
 func _process(delta):
 	sync_player_background_y()
