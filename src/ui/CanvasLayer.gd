@@ -94,21 +94,26 @@ func _process(delta):
 
 
 func _on_start_button_button_down():
+	Input.vibrate_handheld(10)
 	emit_signal('start_signal')
 
 
 func _on_restart_button_pressed():
+	Input.vibrate_handheld(10)
 	emit_signal('restart_signal')
 
 
 func _on_back_button_pressed():
+	Input.vibrate_handheld(10)
 	emit_signal('back_signal')
 
 
 func _on_story_mode_selector_pressed():
+	Input.vibrate_handheld(10)
 	emit_signal('story_signal')
 	emit_signal('level_select_signal')
 
 
 func _on_endless_mode_selector_pressed():
+	Input.vibrate_handheld(10)
 	emit_signal('endless_signal')

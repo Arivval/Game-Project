@@ -28,6 +28,7 @@ func _ready():
 
 
 func _on_Button_pressed():
+	Input.vibrate_handheld(10)
 	if is_level_select_button:
 		var main_node = get_node('/root/Node2D')
 		main_node.set_level(self.text)
