@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 128, 128 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 128, 128 )
+
 [node name="Obstacles" type="Node2D"]
+position = Vector2( 0, -3 )
 
 [node name="Obstacle" type="Area2D" parent="."]
 position = Vector2( 488.104, -49.3305 )
@@ -54,6 +58,25 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="Obstacle3"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle17" type="Area2D" parent="."]
+position = Vector2( 566.273, -7055.92 )
+rotation = 0.785398
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle17"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Obstacle17"]
 margin_left = -128.0
 margin_top = -128.0
 margin_right = 128.0
@@ -303,233 +326,15 @@ __meta__ = {
 }
 
 [node name="FinishLine" type="Area2D" parent="."]
-position = Vector2( 469.226, -5894.23 )
+position = Vector2( 169.578, -7404.48 )
 scale = Vector2( 10, 0.1 )
+collision_layer = 2
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
 shape = SubResource( 1 )
-
-[node name="Obstacle17" type="Area2D" parent="."]
-position = Vector2( -174.894, -6518.59 )
-rotation = 0.785398
-scale = Vector2( 2, 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle17"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle17"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle19" type="Area2D" parent="."]
-position = Vector2( -132.232, -6883.04 )
-rotation = 0.785398
-scale = Vector2( 2, 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle19"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle19"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle20" type="Area2D" parent="."]
-position = Vector2( 673.473, -6884.04 )
-rotation = 0.785398
-scale = Vector2( 2, 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle20"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle20"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle21" type="Area2D" parent="."]
-position = Vector2( 87.5458, -7569.47 )
-rotation = 0.785398
-scale = Vector2( 2, 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle21"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle21"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle22" type="Area2D" parent="."]
-position = Vector2( 385.627, -7742.21 )
-rotation = 0.785398
-scale = Vector2( 2, 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle22"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle22"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle23" type="Area2D" parent="."]
-position = Vector2( 89.7494, -8116 )
-rotation = 0.785398
-scale = Vector2( 1, 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle23"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle23"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle24" type="Area2D" parent="."]
-position = Vector2( 618.663, -8467.16 )
-rotation = 0.785398
-scale = Vector2( 1, 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle24"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle24"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle25" type="Area2D" parent="."]
-position = Vector2( 89.1434, -8469.07 )
-rotation = 0.785398
-scale = Vector2( 1, 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle25"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle25"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle26" type="Area2D" parent="."]
-position = Vector2( 366.146, -9125.2 )
-rotation = 0.785398
-scale = Vector2( 1, 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle26"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle26"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle27" type="Area2D" parent="."]
-position = Vector2( 262.36, -9745.35 )
-rotation = 0.785398
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle27"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle27"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Obstacle18" type="Area2D" parent="."]
-position = Vector2( 710.721, -6513.94 )
-rotation = 0.785398
-scale = Vector2( 2, 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle18"]
-shape = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Obstacle18"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Obstacle6" type="Area2D" parent="."]
 position = Vector2( 438.389, -1372.6 )
@@ -552,3 +357,71 @@ __meta__ = {
 }
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2( -2.51086, -5663.67 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Obstacle" type="Area2D" parent="Node2D2"]
+position = Vector2( 3.96191, -180.509 )
+rotation = 0.785398
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/Obstacle"]
+shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D2/Obstacle"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle2" type="Area2D" parent="Node2D2"]
+position = Vector2( 88.4122, -817.216 )
+rotation = 0.785398
+scale = Vector2( 1, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/Obstacle2"]
+shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D2/Obstacle2"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacle3" type="Area2D" parent="Node2D2"]
+position = Vector2( 449.456, -373.455 )
+rotation = 0.785398
+scale = Vector2( 2, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/Obstacle3"]
+shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D2/Obstacle3"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="height" type="Area2D" parent="Node2D2"]
+position = Vector2( 177.292, -1088.37 )
