@@ -1,5 +1,5 @@
 # Dot Go!
-### - A minimalist mobile casual game made using the Godot engine
+### - A minimalistic mobile casual game made with Godot engine
 
 ## Manifest:
 - You are controlling a dot in this game. You can tap the screen to reflect the direction the dot is moving. Avoid the obstacles in order to win.
