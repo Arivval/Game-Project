@@ -162,11 +162,14 @@ func download_dlc():
 func download_completion_handler(result, response_code, headers, body):
 	print('dlc fetched')
 	var dlc_file = File.new()
-	dlc_file.open('res://Level_1_2.tscn', File.WRITE)
+	dlc_file.open('res://dlc.pck', File.WRITE)
 	dlc_file.store_buffer(body)
 	dlc_file.close()
-	print('dlc written')
-	
+	var load_status = ProjectSettings.load_resource_pack('res://dlc.pck')
+	print('dlc written', load_status, dlc_file)
+	$CanvasLayer.get_node("title/title_text").text = str(dlc_file)
+	$CanvasLayer.get_node("title/title_text_shadow").text = str(load_status)
+
 
 func _ready():
 	# to save time, find node is only executed once
@@ -182,8 +185,6 @@ func _ready():
 	
 	# load packed scene pck file
 	download_dlc()
-	
-	ProjectSettings.load_resource_pack('res://Level_1_2.tscn')
 	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
