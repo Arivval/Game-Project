@@ -407,6 +407,8 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
 [connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
 [connection signal="end_signal" from="Player" to="." method="end_game"]

@@ -153,6 +153,21 @@ func sync_player_background_y():
 	background_node.rect_position.y = background_init_position.y + y_delta
 
 
+func download_dlc():
+	var dlc_path = 'https://github.com/Arivval/Game-Project/releases/download/1.0/dlc.pck'
+	$HTTPRequest.connect('request_completed', self, 'download_completion_handler')
+	$HTTPRequest.request(dlc_path)
+
+
+func download_completion_handler(result, response_code, headers, body):
+	print('dlc fetched')
+	var dlc_file = File.new()
+	dlc_file.open('res://Level_1_2.tscn', File.WRITE)
+	dlc_file.store_buffer(body)
+	dlc_file.close()
+	print('dlc written')
+	
+
 func _ready():
 	# to save time, find node is only executed once
 	player_node = $Player
@@ -166,7 +181,9 @@ func _ready():
 	background_init_position = background_node.rect_position
 	
 	# load packed scene pck file
-	ProjectSettings.load_resource_pack('dlc.pck')
+	download_dlc()
+	
+	ProjectSettings.load_resource_pack('res://Level_1_2.tscn')
 	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
