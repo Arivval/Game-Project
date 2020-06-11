@@ -153,6 +153,7 @@ func sync_player_background_y():
 	background_node.rect_position.y = background_init_position.y + y_delta
 
 
+# Internet permission must be granted in order to let it work on Android
 func download_dlc():
 	var dlc_path = 'https://github.com/Arivval/Game-Project/releases/download/1.0/dlc.pck'
 	$HTTPRequest.connect('request_completed', self, 'download_completion_handler')
@@ -160,15 +161,11 @@ func download_dlc():
 
 
 func download_completion_handler(result, response_code, headers, body):
-	print('dlc fetched')
 	var dlc_file = File.new()
-	dlc_file.open('res://dlc.pck', File.WRITE)
+	dlc_file.open('user://dlc.pck', File.WRITE)
 	dlc_file.store_buffer(body)
 	dlc_file.close()
-	var load_status = ProjectSettings.load_resource_pack('res://dlc.pck')
-	print('dlc written', load_status, dlc_file)
-	$CanvasLayer.get_node("title/title_text").text = str(dlc_file)
-	$CanvasLayer.get_node("title/title_text_shadow").text = str(load_status)
+	var load_status = ProjectSettings.load_resource_pack('user://dlc.pck')
 
 
 func _ready():
