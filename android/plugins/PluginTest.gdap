@@ -1,0 +1,6 @@
+[config]
+
+name="PluginTest"
+binary_type="local"
+binary="PluginTest.aar"
+
