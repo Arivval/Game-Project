@@ -153,7 +153,16 @@ func sync_player_background_y():
 	background_node.rect_position.y = background_init_position.y + y_delta
 
 
+# check if plugin exist and instantiate it
+func load_android_plugin():
+	$CanvasLayer/title/title_text.text = str(Engine.has_singleton('TestPlugin'))
+	if Engine.has_singleton('TestPlugin'):
+		var plugin = Engine.load_singleton('TestPlugin')
+		print(plugin)
+
+
 func _ready():
+	load_android_plugin()
 	# to save time, find node is only executed once
 	player_node = $Player
 	background_node = $ColorRect
