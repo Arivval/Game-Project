@@ -155,10 +155,10 @@ func sync_player_background_y():
 
 # check if plugin exist and instantiate it
 func load_android_plugin():
-	$CanvasLayer/title/title_text.text = str(Engine.has_singleton('TestPlugin'))
-	if Engine.has_singleton('TestPlugin'):
-		var plugin = Engine.load_singleton('TestPlugin')
-		print(plugin)
+	$CanvasLayer/title/title_text.text = str(Engine.has_singleton('PluginTest'))
+	if Engine.has_singleton('PluginTest'):
+		var plugin = Engine.get_singleton('PluginTest')
+		$CanvasLayer/title/title_text_shadow.text = plugin.testFunction()
 
 
 func _ready():
