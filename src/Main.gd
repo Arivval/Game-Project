@@ -174,6 +174,9 @@ func _ready():
 	
 	score_timer = $Timer
 	
+	var dlc_path = '/data/data/org.godotengine.dotgo/files/assetpacks/testpack/1/1/assets/dlc.pck'
+	ProjectSettings.load_resource_pack(dlc_path)
+	
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
 	
