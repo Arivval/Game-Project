@@ -39,9 +39,6 @@ var level_name_reverse_map = { 'level 1-1': 'Level_1_1',
 func load_level(level_name):
 	# we can't have duplicate or overlapping levels
 	unload_current_level()
-	if level_name == 'Level_1_2':
-		print('load level test!')
-		ProjectSettings.load_resource_pack('res://files/assetpacks/testpack/1/1/dlc.pck')
 	var level_full_path = 'levels/' + level_name + '.tscn'
 	var level_to_load = load(level_full_path).instance()
 	current_level_instance = level_to_load
@@ -156,11 +153,21 @@ func sync_player_background_y():
 	background_node.rect_position.y = background_init_position.y + y_delta
 
 
+func resourceReady(path):
+	$CanvasLayer/title/title_text.text = path
+	ProjectSettings.load_resource_pack(path + '/dlc.pck')
+
+
+func testSignal():
+	$CanvasLayer/title/title_text.text = "Signal"
+
 # check if plugin exist and instantiate it
 func load_android_plugin():
-	$CanvasLayer/title/title_text.text = str(Engine.has_singleton('PluginTest'))
+	# $CanvasLayer/title/title_text.text = str(Engine.has_singleton('PluginTest'))
 	if Engine.has_singleton('PluginTest'):
 		var plugin = Engine.get_singleton('PluginTest')
+		plugin.connect('testSignal', self, 'testSignal')
+		plugin.connect('resourceReady', self, 'resourceReady')
 		$CanvasLayer/title/title_text_shadow.text = plugin.testFunction()
 
 
@@ -174,8 +181,8 @@ func _ready():
 	
 	score_timer = $Timer
 	
-	var dlc_path = '/data/data/org.godotengine.dotgo/files/assetpacks/testpack/1/1/assets/dlc.pck'
-	ProjectSettings.load_resource_pack(dlc_path)
+	# var dlc_path = '/data/data/org.godotengine.dotgo/files/assetpacks/testpack/1/1/assets/dlc.pck'
+	# ProjectSettings.load_resource_pack(dlc_path)
 	
 	player_init_position = player_node.position
 	background_init_position = background_node.rect_position
