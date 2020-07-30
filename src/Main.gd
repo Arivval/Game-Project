@@ -150,16 +150,17 @@ func enable_endless_mode():
 # background along with the player to make the map seem infinite
 func sync_player_background_y():
 	var y_delta = player_node.position.y - player_init_position.y
-	background_node.rect_position.y = background_init_position.y + y_delta
 
 
 func resourceReady(path):
 	$CanvasLayer/title/title_text.text = path
 	ProjectSettings.load_resource_pack(path + '/dlc.pck')
+	$CanvasLayer/title/title_text.text = path
 
 
-func testSignal():
-	$CanvasLayer/title/title_text.text = "Signal"
+func testSignal(dict, signalID):
+	$CanvasLayer/title/title_text_shadow.text = dict
+
 
 # check if plugin exist and instantiate it
 func load_android_plugin():
@@ -168,14 +169,78 @@ func load_android_plugin():
 		var plugin = Engine.get_singleton('PluginTest')
 		plugin.connect('testSignal', self, 'testSignal')
 		plugin.connect('resourceReady', self, 'resourceReady')
-		$CanvasLayer/title/title_text_shadow.text = plugin.testFunction()
+		$CanvasLayer/title/title_text.text = plugin.testFunction()
+		plugin.logDict($CanvasLayer/title/title_text.text)
+		plugin.logDict("Here! works fine!!!!")
 
+func load_play_asset_delivery():
+	if Engine.has_singleton('PlayAssetDelivery'):
+		var plugin = Engine.get_singleton('PlayAssetDelivery')
+		plugin.logDict("PlayAssetDelivery loaded")
+		var pack_name = "testpack"
+		plugin.fetch([pack_name], 0)
+
+func fetch_completed(pack_name, result, exception):
+	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
+	var pack_location : PlayAssetPackLocation = pad_manager.get_pack_location(pack_name)
+	var dlc_folder = pack_location.get_assets_path()
+	$CanvasLayer/title/title_text_shadow.text = dlc_folder
+	ProjectSettings.load_resource_pack(dlc_folder + '/dlc.pck')
+	
+	var get_state_request = pad_manager.get_asset_pack_state(pack_name + " suffix")
+	yield(get_state_request, "request_completed")
+	var plugin = Engine.get_singleton('PlayAssetDelivery')
+	plugin.logDict("yield done")
+	plugin.logDict(str(get_state_request.get_did_succeed()) + " " + get_state_request.get_error().get_message())
+
+func global_state_udpate(pack_name, result):
+	$CanvasLayer/title/title_text.text = "called"
+	var plugin = Engine.get_singleton('PlayAssetDelivery')
+	plugin.logDict(pack_name + str(result.get_bytes_downloaded()))
+
+func print_updated_state(pack_name : String):
+	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
+	var plugin = pad_manager._plugin_singleton
+	var request_object = pad_manager.get_asset_pack_state(pack_name)
+	yield(request_object, "request_completed")
+	var request_result = request_object.get_result()
+	var status_int = request_result.get_status()
+	plugin.logDict("Updated state!!!!!" +  str(status_int))
+	plugin.getPackStates([pack_name, "wefwef"], 45)
+
+func print_downloaded_pack_amount():
+	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
+	var plugin = pad_manager._plugin_singleton
+	var pack_amount = pad_manager.get_pack_locations().keys().size()
+	plugin.logDict("Amount downloaded! " +  str(pack_amount))
+
+func load_asset_pack():
+	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
+	pad_manager.connect("state_updated", self, "global_state_udpate")
+	var plugin = pad_manager._plugin_singleton
+	var pack_name = "testpack"
+	var remove_request = pad_manager.remove_pack(pack_name)
+	yield(remove_request, "request_completed")
+	
+	print_downloaded_pack_amount()
+	print_updated_state(pack_name)
+	
+	var fetch_request = pad_manager.fetch_asset_pack(pack_name)
+	# fetch_request.connect("request_completed", self, "fetch_completed")
+	yield(fetch_request, "request_completed")
+	print_downloaded_pack_amount()
+	var pack_location : PlayAssetPackLocation = pad_manager.get_pack_location(pack_name)
+	var dlc_folder = pack_location.get_assets_path()
+	$CanvasLayer/title/title_text_shadow.text = dlc_folder
+	ProjectSettings.load_resource_pack(dlc_folder + '/dlc.pck')
 
 func _ready():
-	load_android_plugin()
+	# load_android_plugin()
+	# load_play_asset_delivery()
+	load_asset_pack()
 	# to save time, find node is only executed once
 	player_node = $Player
-	background_node = $ColorRect
+	background_node = $Player
 	canvas_node = $CanvasLayer
 	camera_node = player_node.find_node('Camera2D')
 	
@@ -185,7 +250,7 @@ func _ready():
 	# ProjectSettings.load_resource_pack(dlc_path)
 	
 	player_init_position = player_node.position
-	background_init_position = background_node.rect_position
+	background_init_position = player_node.position
 	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
