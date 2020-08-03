@@ -8,9 +8,74 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Object",
+"class": "PlayAssetDeliveryRequest",
+"language": "GDScript",
+"path": "res://pad/model/request/play_asset_delivery_request.gd"
+}, {
+"base": "Object",
+"class": "PlayAssetDeliveryRequestTracker",
+"language": "GDScript",
+"path": "res://pad/play_asset_delivery_request_tracker.gd"
+}, {
+"base": "Object",
+"class": "PlayAssetLocation",
+"language": "GDScript",
+"path": "res://pad/model/play_asset_location.gd"
+}, {
+"base": "Object",
+"class": "PlayAssetPackException",
+"language": "GDScript",
+"path": "res://pad/model/play_asset_pack_exception.gd"
+}, {
+"base": "PlayAssetDeliveryRequest",
+"class": "PlayAssetPackFetchRequest",
+"language": "GDScript",
+"path": "res://pad/model/request/play_asset_pack_fetch_request.gd"
+}, {
+"base": "Object",
+"class": "PlayAssetPackLocation",
+"language": "GDScript",
+"path": "res://pad/model/play_asset_pack_location.gd"
+}, {
+"base": "PlayAssetDeliveryRequest",
+"class": "PlayAssetPackRemoveRequest",
+"language": "GDScript",
+"path": "res://pad/model/request/play_asset_pack_remove_request.gd"
+}, {
+"base": "Object",
+"class": "PlayAssetPackState",
+"language": "GDScript",
+"path": "res://pad/model/play_asset_pack_state.gd"
+}, {
+"base": "PlayAssetDeliveryRequest",
+"class": "PlayAssetPackStateRequest",
+"language": "GDScript",
+"path": "res://pad/model/request/play_asset_pack_state_request.gd"
+}, {
+"base": "Object",
+"class": "PlayAssetPackStates",
+"language": "GDScript",
+"path": "res://pad/model/play_asset_pack_states.gd"
+}, {
+"base": "PlayAssetDeliveryRequest",
+"class": "PlayCellularDataConfirmationRequest",
+"language": "GDScript",
+"path": "res://pad/model/request/play_cellular_data_confirmation_request.gd"
+} ]
 _global_script_class_icons={
-
+"PlayAssetDeliveryRequest": "",
+"PlayAssetDeliveryRequestTracker": "",
+"PlayAssetLocation": "",
+"PlayAssetPackException": "",
+"PlayAssetPackFetchRequest": "",
+"PlayAssetPackLocation": "",
+"PlayAssetPackRemoveRequest": "",
+"PlayAssetPackState": "",
+"PlayAssetPackStateRequest": "",
+"PlayAssetPackStates": "",
+"PlayCellularDataConfirmationRequest": ""
 }
 
 [application]
@@ -18,6 +83,10 @@ _global_script_class_icons={
 config/name="Dot Go!"
 run/main_scene="res://main_scene.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+PlayAssetPackManager="*res://pad/play_asset_pack_manager.gd"
 
 [display]
 

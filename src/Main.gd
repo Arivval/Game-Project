@@ -16,6 +16,8 @@
 
 extends Node2D
 
+const pack_download_div_scene = preload("res://pad_ui/pack_download_div.tscn")
+
 var score
 var player_node
 var background_node
@@ -145,33 +147,10 @@ func enable_endless_mode():
 	$CanvasLayer/story_mode_label.bbcode_text = level_name_map[current_level]
 	$CanvasLayer/endless_mode_label.bbcode_text = '[u]endless[/u]'
 
-
 # since our camera is locked on the player, we also need to move the
 # background along with the player to make the map seem infinite
 func sync_player_background_y():
 	var y_delta = player_node.position.y - player_init_position.y
-
-
-func resourceReady(path):
-	$CanvasLayer/title/title_text.text = path
-	ProjectSettings.load_resource_pack(path + '/dlc.pck')
-	$CanvasLayer/title/title_text.text = path
-
-
-func testSignal(dict, signalID):
-	$CanvasLayer/title/title_text_shadow.text = dict
-
-
-# check if plugin exist and instantiate it
-func load_android_plugin():
-	# $CanvasLayer/title/title_text.text = str(Engine.has_singleton('PluginTest'))
-	if Engine.has_singleton('PluginTest'):
-		var plugin = Engine.get_singleton('PluginTest')
-		plugin.connect('testSignal', self, 'testSignal')
-		plugin.connect('resourceReady', self, 'resourceReady')
-		$CanvasLayer/title/title_text.text = plugin.testFunction()
-		plugin.logDict($CanvasLayer/title/title_text.text)
-		plugin.logDict("Here! works fine!!!!")
 
 func load_play_asset_delivery():
 	if Engine.has_singleton('PlayAssetDelivery'):
@@ -180,64 +159,34 @@ func load_play_asset_delivery():
 		var pack_name = "testpack"
 		plugin.fetch([pack_name], 0)
 
-func fetch_completed(pack_name, result, exception):
-	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
-	var pack_location : PlayAssetPackLocation = pad_manager.get_pack_location(pack_name)
-	var dlc_folder = pack_location.get_assets_path()
-	$CanvasLayer/title/title_text_shadow.text = dlc_folder
-	ProjectSettings.load_resource_pack(dlc_folder + '/dlc.pck')
-	
-	var get_state_request = pad_manager.get_asset_pack_state(pack_name + " suffix")
-	yield(get_state_request, "request_completed")
-	var plugin = Engine.get_singleton('PlayAssetDelivery')
-	plugin.logDict("yield done")
-	plugin.logDict(str(get_state_request.get_did_succeed()) + " " + get_state_request.get_error().get_message())
-
-func global_state_udpate(pack_name, result):
-	$CanvasLayer/title/title_text.text = "called"
-	var plugin = Engine.get_singleton('PlayAssetDelivery')
-	plugin.logDict(pack_name + str(result.get_bytes_downloaded()))
-
-func print_updated_state(pack_name : String):
-	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
-	var plugin = pad_manager._plugin_singleton
-	var request_object = pad_manager.get_asset_pack_state(pack_name)
-	yield(request_object, "request_completed")
-	var request_result = request_object.get_result()
-	var status_int = request_result.get_status()
-	plugin.logDict("Updated state!!!!!" +  str(status_int))
-	plugin.getPackStates([pack_name, "wefwef"], 45)
-
-func print_downloaded_pack_amount():
-	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
-	var plugin = pad_manager._plugin_singleton
-	var pack_amount = pad_manager.get_pack_locations().keys().size()
-	plugin.logDict("Amount downloaded! " +  str(pack_amount))
-
 func load_asset_pack():
 	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
-	pad_manager.connect("state_updated", self, "global_state_udpate")
 	var plugin = pad_manager._plugin_singleton
 	var pack_name = "testpack"
 	var remove_request = pad_manager.remove_pack(pack_name)
 	yield(remove_request, "request_completed")
 	
-	print_downloaded_pack_amount()
-	print_updated_state(pack_name)
-	
 	var fetch_request = pad_manager.fetch_asset_pack(pack_name)
-	# fetch_request.connect("request_completed", self, "fetch_completed")
+	
 	yield(fetch_request, "request_completed")
-	print_downloaded_pack_amount()
+	
 	var pack_location : PlayAssetPackLocation = pad_manager.get_pack_location(pack_name)
 	var dlc_folder = pack_location.get_assets_path()
 	$CanvasLayer/title/title_text_shadow.text = dlc_folder
 	ProjectSettings.load_resource_pack(dlc_folder + '/dlc.pck')
 
+
+func instantiate_pad_ui():
+	var pack_names = ["testpack"]
+	for pack_name in pack_names:
+		var pack_download_div_instance = pack_download_div_scene.instance()
+		pack_download_div_instance.init(pack_name)
+		pack_download_div_instance.pad_manager = get_node("/root/PlayAssetPackManager")
+		add_child(pack_download_div_instance)
+
 func _ready():
-	# load_android_plugin()
-	# load_play_asset_delivery()
-	load_asset_pack()
+	instantiate_pad_ui()
+	#load_asset_pack()
 	# to save time, find node is only executed once
 	player_node = $Player
 	background_node = $Player
@@ -258,10 +207,8 @@ func _ready():
 	else: 
 		enable_endless_mode()
 
-
 func _process(delta):
 	sync_player_background_y()
-
 
 func _on_Timer_timeout():
 	score += 1

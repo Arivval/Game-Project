@@ -24,7 +24,7 @@ size = 120
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 18
+size = 96
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -49,6 +49,20 @@ font_data = ExtResource( 3 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -37.0
+margin_right = 542.0
+margin_bottom = 1200.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 1, 0.439216, 0.439216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="trailing_tail" type="Line2D" parent="."]
 position = Vector2( 276, 892 )
@@ -157,7 +171,7 @@ __meta__ = {
 
 [node name="title_text" type="Label" parent="CanvasLayer/title"]
 margin_left = 2.0
-margin_top = 42.0
+margin_top = 156.0
 margin_right = 539.0
 margin_bottom = 307.0
 custom_fonts/font = SubResource( 4 )
@@ -168,10 +182,11 @@ __meta__ = {
 }
 
 [node name="start_button" type="Button" parent="CanvasLayer"]
-margin_left = -1.0
-margin_top = 302.0
-margin_right = 537.0
-margin_bottom = 980.0
+visible = false
+margin_left = 0.820892
+margin_top = 230.436
+margin_right = 538.821
+margin_bottom = 908.436
 focus_mode = 0
 custom_fonts/font = SubResource( 5 )
 shortcut_in_tooltip = false
