@@ -49,6 +49,7 @@ __meta__ = {
 }
 
 [node name="Obstacle3" type="Area2D" parent="."]
+visible = false
 position = Vector2( 310.286, -432.982 )
 rotation = 0.785398
 
@@ -118,5 +119,4 @@ __meta__ = {
 
 [node name="Node2D" type="Node2D" parent="."]
 [connection signal="pressed" from="Obstacle/Button" to="Obstacle/Button" method="_on_Button_pressed"]
-[connection signal="pressed" from="Obstacle3/Button" to="Obstacle3/Button" method="_on_get_more_level_button_pressed"]
 [connection signal="pressed" from="Obstacle2/Button" to="Obstacle2/Button" method="_on_Button_pressed"]

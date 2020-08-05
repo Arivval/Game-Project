@@ -17,6 +17,11 @@
 
 extends Node2D
 
+func init(available_packs):
+	if not available_packs.has("testpack"):
+		$Obstacle2.hide()
+	else:
+		$Obstacle2.show()
 
 func _ready():
 	pass

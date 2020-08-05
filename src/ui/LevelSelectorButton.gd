@@ -20,21 +20,20 @@ extends Button
 # this button can also be the DLC button, in which case we shoule not
 # treat it as a level selector
 var is_level_select_button = true
-var pack_names = ["testpack", "testpack2"]
-
 
 func _ready():
 	if self.text == 'Get More Levels':
 		is_level_select_button = false
-
-func _on_get_more_level_button_pressed():
-	var pad_download_node = load('pad_ui/pack_download_page.tscn').instance()
-	pad_download_node.init(pack_names)
-	add_child(pad_download_node)
-	print_tree_pretty()
 
 func _on_Button_pressed():
 	Input.vibrate_handheld(10)
 	if is_level_select_button:
 		var main_node = get_node('/root/Node2D')
 		main_node.set_level(self.text)
+	
+	if self.text == "Level 1-2":
+		VisualServer.set_default_clear_color(Color(0.4392, 0.65098, 1.0, 1.0))
+	else:
+		VisualServer.set_default_clear_color(Color(1.0, 0.4392, 0.4392, 1.0))
+		
+

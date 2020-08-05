@@ -17,6 +17,11 @@
 extends Node2D
 
 const pack_download_div_scene = preload("res://pad_ui/pack_download_div.tscn")
+const pack_download_page_scene = preload("res://pad_ui/pack_download_page.tscn")
+
+var pack_download_page_instance
+var available_packs = ["testpack", "testpack_2"]
+var downloaded_packs = {}
 
 var score
 var player_node
@@ -45,6 +50,7 @@ func load_level(level_name):
 	var level_to_load = load(level_full_path).instance()
 	current_level_instance = level_to_load
 	add_child(level_to_load)
+	
 
 
 func unload_current_level():
@@ -62,6 +68,7 @@ func unload_instantiated_obstacles():
 	
 	
 func start_game():
+	hide_pad_ui()
 	if is_story_mode:
 		unload_instantiated_obstacles()
 		load_level(current_level)
@@ -110,6 +117,7 @@ func restart_game():
 
 
 func to_main_screen():
+	show_pad_ui()
 	player_node.reset_dot_position()
 	canvas_node.hide_end_screen()
 	canvas_node.show_start_screen()
@@ -117,6 +125,7 @@ func to_main_screen():
 
 func load_level_select_screen():
 	level_select_node = load('levels/LevelSelector.tscn').instance()
+	level_select_node.init(downloaded_packs)
 	add_child(level_select_node)
 	unload_current_level()
 	unload_instantiated_obstacles()
@@ -162,6 +171,11 @@ func load_play_asset_delivery():
 func load_asset_pack():
 	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
 	var plugin = pad_manager._plugin_singleton
+	
+	# VisualServer.set_default_clear_color(Color(0.0, 0.0, 0.0, 1.0))
+	
+	return
+	
 	var pack_name = "testpack"
 	var remove_request = pad_manager.remove_pack(pack_name)
 	yield(remove_request, "request_completed")
@@ -175,18 +189,27 @@ func load_asset_pack():
 	$CanvasLayer/title/title_text_shadow.text = dlc_folder
 	ProjectSettings.load_resource_pack(dlc_folder + '/dlc.pck')
 
+func show_pad_ui():
+	pack_download_page_instance.show()
+
+func hide_pad_ui():
+	pack_download_page_instance.hide()
 
 func instantiate_pad_ui():
-	var pack_names = ["testpack"]
-	for pack_name in pack_names:
-		var pack_download_div_instance = pack_download_div_scene.instance()
-		pack_download_div_instance.init(pack_name)
-		pack_download_div_instance.pad_manager = get_node("/root/PlayAssetPackManager")
-		add_child(pack_download_div_instance)
+	pack_download_page_instance = pack_download_page_scene.instance()
+	var pad_manager = get_node("/root/PlayAssetPackManager")	
+	pack_download_page_instance.init(available_packs, pad_manager)
+	add_child(pack_download_page_instance)
+
+func add_downloaded_pack(pack_name):
+	downloaded_packs[pack_name] = true
+
+func remove_downloaded_pack(pack_name):
+	downloaded_packs.erase(pack_name)
 
 func _ready():
 	instantiate_pad_ui()
-	#load_asset_pack()
+	# load_asset_pack()
 	# to save time, find node is only executed once
 	player_node = $Player
 	background_node = $Player
