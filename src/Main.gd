@@ -25,12 +25,10 @@ var downloaded_packs = {}
 
 var score
 var player_node
-var background_node
 var canvas_node
 var level_select_node = null
 var camera_node
 var player_init_position
-var background_init_position
 var is_story_mode = true
 var score_timer
 
@@ -183,14 +181,12 @@ func _ready():
 	instantiate_pad_ui()
 	# to save time, find node is only executed once
 	player_node = $Player
-	background_node = $Player
 	canvas_node = $CanvasLayer
 	camera_node = player_node.find_node('Camera2D')
 	
 	score_timer = $Timer
 	
 	player_init_position = player_node.position
-	background_init_position = player_node.position
 	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
