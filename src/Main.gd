@@ -161,34 +161,6 @@ func enable_endless_mode():
 func sync_player_background_y():
 	var y_delta = player_node.position.y - player_init_position.y
 
-func load_play_asset_delivery():
-	if Engine.has_singleton('PlayAssetDelivery'):
-		var plugin = Engine.get_singleton('PlayAssetDelivery')
-		plugin.logDict("PlayAssetDelivery loaded")
-		var pack_name = "testpack"
-		plugin.fetch([pack_name], 0)
-
-func load_asset_pack():
-	var pad_manager : PlayAssetPackManager = get_node("/root/PlayAssetPackManager")
-	var plugin = pad_manager._plugin_singleton
-	
-	# VisualServer.set_default_clear_color(Color(0.0, 0.0, 0.0, 1.0))
-	
-	return
-	
-	var pack_name = "testpack"
-	var remove_request = pad_manager.remove_pack(pack_name)
-	yield(remove_request, "request_completed")
-	
-	var fetch_request = pad_manager.fetch_asset_pack(pack_name)
-	
-	yield(fetch_request, "request_completed")
-	
-	var pack_location : PlayAssetPackLocation = pad_manager.get_pack_location(pack_name)
-	var dlc_folder = pack_location.get_assets_path()
-	$CanvasLayer/title/title_text_shadow.text = dlc_folder
-	ProjectSettings.load_resource_pack(dlc_folder + '/dlc.pck')
-
 func show_pad_ui():
 	pack_download_page_instance.show()
 
@@ -209,7 +181,6 @@ func remove_downloaded_pack(pack_name):
 
 func _ready():
 	instantiate_pad_ui()
-	# load_asset_pack()
 	# to save time, find node is only executed once
 	player_node = $Player
 	background_node = $Player
@@ -217,9 +188,6 @@ func _ready():
 	camera_node = player_node.find_node('Camera2D')
 	
 	score_timer = $Timer
-	
-	# var dlc_path = '/data/data/org.godotengine.dotgo/files/assetpacks/testpack/1/1/assets/dlc.pck'
-	# ProjectSettings.load_resource_pack(dlc_path)
 	
 	player_init_position = player_node.position
 	background_init_position = player_node.position
