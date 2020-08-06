@@ -20,7 +20,7 @@ const pack_download_div_scene = preload("res://pad_ui/pack_download_div.tscn")
 const pack_download_page_scene = preload("res://pad_ui/pack_download_page.tscn")
 
 var pack_download_page_instance
-var available_packs = ["testpack", "testpack_2"]
+var available_packs = ["testpack"]
 var downloaded_packs = {}
 
 var score
@@ -49,7 +49,6 @@ func load_level(level_name):
 	current_level_instance = level_to_load
 	add_child(level_to_load)
 	
-
 
 func unload_current_level():
 	if current_level_instance != null:

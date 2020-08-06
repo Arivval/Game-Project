@@ -14,7 +14,6 @@
 	limitations under the License.
 """
 
-
 extends Node2D
 
 func init(available_packs):
