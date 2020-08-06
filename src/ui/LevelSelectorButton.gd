@@ -21,13 +21,14 @@ extends Button
 # treat it as a level selector
 var is_level_select_button = true
 
+
 func _ready():
 	if self.text == 'Get More Levels':
 		is_level_select_button = false
+
 
 func _on_Button_pressed():
 	Input.vibrate_handheld(10)
 	if is_level_select_button:
 		var main_node = get_node('/root/Node2D')
 		main_node.set_level(self.text)
-
