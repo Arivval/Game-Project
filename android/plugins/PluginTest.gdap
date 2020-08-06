@@ -1,9 +1,0 @@
-[config]
-
-name="PluginTest"
-binary_type="local"
-binary="PluginTest.aar"
-
-[dependencies]
-
-remote=["com.google.android.play:core:1.7.3"]
