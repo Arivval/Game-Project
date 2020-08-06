@@ -48,7 +48,7 @@ func load_level(level_name):
 	var level_to_load = load(level_full_path).instance()
 	current_level_instance = level_to_load
 	add_child(level_to_load)
-	
+
 
 func unload_current_level():
 	if current_level_instance != null:
@@ -152,6 +152,7 @@ func enable_endless_mode():
 	is_story_mode = false
 	$CanvasLayer/story_mode_label.bbcode_text = level_name_map[current_level]
 	$CanvasLayer/endless_mode_label.bbcode_text = '[u]endless[/u]'
+
 
 # since our camera is locked on the player, we also need to move the
 # background along with the player to make the map seem infinite

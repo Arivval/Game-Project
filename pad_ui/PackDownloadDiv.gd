@@ -13,6 +13,9 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 """
+"""
+	Object used to display one row of UI for handling asset pack downloads
+"""
 
 extends Node2D
 
@@ -32,23 +35,32 @@ func init(_pack_name : String, _pad_manager : PlayAssetPackManager):
 		_show_init_ui()
 
 func _convert_byte_to_stepified_megabytes(byte_value : int):
-	return stepify(float(byte_value)/1000000, 0.01)
+	# convert bytes to MB with 2 digits of precision
+	return stepify(byte_value/1000000, 0.01)
 
 func _process(delta):
 	if request_obj == null:
 		return
 
-	if request_obj != null and request_obj.get_state().get_status() != 0:
-		var progress_percent = float(request_obj.get_state().get_bytes_downloaded())/float(request_obj.get_state().get_total_bytes_to_download())
-		var downloaded_megabyte = str(_convert_byte_to_stepified_megabytes(request_obj.get_state().get_bytes_downloaded()))
-		var totla_megabyte = str(_convert_byte_to_stepified_megabytes(request_obj.get_state().get_total_bytes_to_download()))
-		if request_obj.get_state()._status != PlayAssetPackManager.AssetPackStatus.COMPLETED:
-			$ProgressText.text = downloaded_megabyte + "MB/" + totla_megabyte + "MB"
-			$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, int(progress_percent*100), 0.4, Tween.TRANS_QUART, Tween.EASE_OUT)
+	var should_update_ui = request_obj != null and request_obj.get_state().get_status() != \
+		PlayAssetPackManager.AssetPackStatus.UNKNOWN
+	
+	if should_update_ui:
+		# update the downloading UI
+		var bytes_downloaded = float(request_obj.get_state().get_bytes_downloaded())
+		var bytes_to_download = float(request_obj.get_state().get_total_bytes_to_download())
+		var progress_percent = bytes_downloaded/bytes_to_download
+		var downloaded_megabyte = str(_convert_byte_to_stepified_megabytes(bytes_downloaded))
+		var total_megabyte = str(_convert_byte_to_stepified_megabytes(bytes_to_download))
+		
+		if request_obj.get_state().get_status() != PlayAssetPackManager.AssetPackStatus.COMPLETED:
+			$ProgressText.text = downloaded_megabyte + "MB/" + total_megabyte + "MB"
+			# start progress bar animation
+			$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, \
+				int(progress_percent*100), 0.4, Tween.TRANS_QUART, Tween.EASE_OUT)
 			$Tween.start()
 
 func _reset_download_ui():
-	# $ProgressBar.value = 0
 	$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, 0, 0.01, Tween.TRANS_QUART, Tween.EASE_OUT)
 	$Tween.start()
 	$ProgressText.text = "-MB/-MB"
@@ -64,7 +76,7 @@ func _on_retry_button_pressed():
 	request_obj.connect("request_completed", self, "handle_request_completed")
 	_reset_download_ui()
 	_hide_faileded_ui()
-	call_deferred("_show_downloading_ui")
+	_show_downloading_ui()
 
 func _on_download_button_pressed():
 	# clear previous download value
@@ -72,12 +84,13 @@ func _on_download_button_pressed():
 	request_obj.connect("request_completed", self, "handle_request_completed")
 	_reset_download_ui()
 	_hide_init_ui()
-	call_deferred("_show_downloading_ui")
+	_show_downloading_ui()
 
 func _on_delete_button_pressed():
 	_hide_completed_ui()
 	_show_init_ui()
 	pad_manager.remove_pack(pack_name)
+	# update downloaded_packs var in Main.gd
 	self.get_parent().get_parent().remove_downloaded_pack(pack_name)
 
 func _show_init_ui():
@@ -100,6 +113,7 @@ func _hide_downloading_ui():
 	$CancelButton.hide()
 
 func _show_completed_ui():
+	# added extra spaces to account for the checkmark icon
 	$TerminalStateText.text = "    Download Completed"
 	$TerminalStateText.show()
 	$CompletedIcon.show()
@@ -111,6 +125,7 @@ func _hide_completed_ui():
 	$DeleteButton.hide()
 
 func _show_failed_ui():
+	# added extra spaces to account for the error icon
 	$TerminalStateText.text = "    Failed"
 	$TerminalStateText.show()
 	$ErrorIcon.show()
@@ -128,38 +143,7 @@ func handle_request_completed(pack_name, result : PlayAssetPackState, exception)
 		var dlc_folder = pack_location.get_assets_path()
 		ProjectSettings.load_resource_pack(dlc_folder + '/dlc.pck')
 		_show_completed_ui()
+		# update downloaded_packs var in Main.gd
 		self.get_parent().get_parent().add_downloaded_pack(pack_name)
 	else:
 		_show_failed_ui()
-
-
-func load_fake_asset_pack():
-	var pack_size = 42000000
-	var state_dict = {
-		PlayAssetPackState._NAME_KEY: "packName",
-		PlayAssetPackState._STATUS_KEY: PlayAssetPackManager.AssetPackStatus.DOWNLOADING,
-		PlayAssetPackState._ERROR_CODE_KEY: PlayAssetPackManager.AssetPackErrorCode.NO_ERROR,
-		PlayAssetPackState._BYTES_DOWNLOADED_KEY: 0,
-		PlayAssetPackState._TOTAL_BYTES_TO_DOWNLOAD_KEY: pack_size,
-		PlayAssetPackState._TRANSFER_PROGRESS_PERCENTAGE_KEY: 0
-	}
-	request_obj._state = PlayAssetPackState.new(state_dict)
-	var timer = Timer.new()
-	timer.set_wait_time(0.8)
-	timer.one_shot = false
-	self.add_child(timer)
-	timer.start()
-	for i in range(10):
-		print("here!!!")
-		request_obj._state._bytes_downloaded = pack_size*(i+1)/10
-		yield(timer, "timeout")
-	timer.queue_free()
-	var completed_state_dict = {
-		PlayAssetPackState._NAME_KEY: "packName",
-		PlayAssetPackState._STATUS_KEY: PlayAssetPackManager.AssetPackStatus.COMPLETED,
-		PlayAssetPackState._ERROR_CODE_KEY: PlayAssetPackManager.AssetPackErrorCode.NO_ERROR,
-		PlayAssetPackState._BYTES_DOWNLOADED_KEY: 0,
-		PlayAssetPackState._TOTAL_BYTES_TO_DOWNLOAD_KEY: pack_size,
-		PlayAssetPackState._TRANSFER_PROGRESS_PERCENTAGE_KEY: 0
-	}
-	request_obj._on_state_updated(completed_state_dict)

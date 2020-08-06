@@ -13,6 +13,9 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 """
+"""
+	Object used to render a list of PackDownloadDiv objects given an Array of packNames
+"""
 
 extends Node2D
 
@@ -29,8 +32,6 @@ func init(_pack_names : Array, _pad_manager : PlayAssetPackManager):
 	for pack_name in pack_names:
 		var pack_download_div_instance = pack_download_div_scene.instance()
 		pack_download_div_instance.position += Vector2(0, div_height*div_count)
-		# pack_download_div_instance.init(pack_name)
-		pack_download_div_instance.pad_manager = get_node("/root/PlayAssetPackManager")
 		pack_download_div_instance.init(pack_name, pad_manager)
 		add_child(pack_download_div_instance)
 		div_count += 1
