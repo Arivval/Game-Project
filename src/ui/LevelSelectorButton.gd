@@ -30,10 +30,4 @@ func _on_Button_pressed():
 	if is_level_select_button:
 		var main_node = get_node('/root/Node2D')
 		main_node.set_level(self.text)
-	
-	if self.text == "Level 1-2":
-		VisualServer.set_default_clear_color(Color(0.4392, 0.65098, 1.0, 1.0))
-	else:
-		VisualServer.set_default_clear_color(Color(1.0, 0.4392, 0.4392, 1.0))
-		
 
