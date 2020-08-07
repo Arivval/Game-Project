@@ -42,8 +42,7 @@ func _process(delta):
 	if request_obj == null:
 		return
 
-	var should_update_ui = request_obj != null and request_obj.get_state().get_status() != \
-		PlayAssetPackManager.AssetPackStatus.UNKNOWN
+	var should_update_ui = request_obj.get_state().get_status() != PlayAssetPackManager.AssetPackStatus.UNKNOWN
 	
 	if should_update_ui:
 		# update the downloading UI
