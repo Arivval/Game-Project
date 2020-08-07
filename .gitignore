@@ -21,6 +21,7 @@ Icon
 
 # Android build files
 *.apk
+*.aab
 android/build/
 
 # Thumbnails
