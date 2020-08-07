@@ -48,20 +48,20 @@ func _process(delta):
 		# update the downloading UI
 		var bytes_downloaded = float(request_obj.get_state().get_bytes_downloaded())
 		var bytes_to_download = float(request_obj.get_state().get_total_bytes_to_download())
-		var progress_percent = bytes_downloaded / bytes_to_download
+		var progress_ratio = bytes_downloaded / bytes_to_download
 		var downloaded_megabyte = str(_convert_byte_to_stepified_megabytes(bytes_downloaded))
 		var total_megabyte = str(_convert_byte_to_stepified_megabytes(bytes_to_download))
 		
 		if request_obj.get_state().get_status() != PlayAssetPackManager.AssetPackStatus.COMPLETED:
 			$ProgressText.text = downloaded_megabyte + "MB/" + total_megabyte + "MB"
 			# start progress bar animation
+			var tween_duration = 0.4
 			$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, \
-				int(progress_percent*100), 0.4, Tween.TRANS_QUART, Tween.EASE_OUT)
+				int(progress_ratio*100), tween_duration, Tween.TRANS_QUART, Tween.EASE_OUT)
 			$Tween.start()
 
 func _reset_download_ui():
-	$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, 0, 0.01, Tween.TRANS_QUART, Tween.EASE_OUT)
-	$Tween.start()
+	$ProgressBar.value = 0
 	$ProgressText.text = "-MB/-MB"
 	
 func _on_cancel_button_pressed():
@@ -74,7 +74,7 @@ func _on_retry_button_pressed():
 	request_obj = pad_manager.fetch_asset_pack(pack_name)
 	request_obj.connect("request_completed", self, "_handle_request_completed")
 	_reset_download_ui()
-	_hide_faileded_ui()
+	_hide_failed_ui()
 	_show_downloading_ui()
 
 func _on_download_button_pressed():
@@ -130,7 +130,7 @@ func _show_failed_ui():
 	$ErrorIcon.show()
 	$RetryButton.show()
 
-func _hide_faileded_ui():
+func _hide_failed_ui():
 	$TerminalStateText.hide()
 	$ErrorIcon.hide()
 	$RetryButton.hide()
