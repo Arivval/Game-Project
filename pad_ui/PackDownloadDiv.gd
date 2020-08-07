@@ -36,7 +36,7 @@ func init(_pack_name : String, _pad_manager : PlayAssetPackManager):
 
 func _convert_byte_to_stepified_megabytes(byte_value : int):
 	# convert bytes to MB with 2 digits of precision
-	return stepify(byte_value/1000000, 0.01)
+	return stepify(byte_value / 1000000, 0.01)
 
 func _process(delta):
 	if request_obj == null:
@@ -49,7 +49,7 @@ func _process(delta):
 		# update the downloading UI
 		var bytes_downloaded = float(request_obj.get_state().get_bytes_downloaded())
 		var bytes_to_download = float(request_obj.get_state().get_total_bytes_to_download())
-		var progress_percent = bytes_downloaded/bytes_to_download
+		var progress_percent = bytes_downloaded / bytes_to_download
 		var downloaded_megabyte = str(_convert_byte_to_stepified_megabytes(bytes_downloaded))
 		var total_megabyte = str(_convert_byte_to_stepified_megabytes(bytes_to_download))
 		
