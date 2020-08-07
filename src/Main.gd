@@ -16,7 +16,6 @@
 
 extends Node2D
 
-const pack_download_div_scene = preload("res://pad_ui/pack_download_div.tscn")
 const pack_download_page_scene = preload("res://pad_ui/pack_download_page.tscn")
 
 var pack_download_page_instance
