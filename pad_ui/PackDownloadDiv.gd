@@ -72,7 +72,7 @@ func _on_cancel_button_pressed():
 func _on_retry_button_pressed():
 	# clear previous download value
 	request_obj = pad_manager.fetch_asset_pack(pack_name)
-	request_obj.connect("request_completed", self, "handle_request_completed")
+	request_obj.connect("request_completed", self, "_handle_request_completed")
 	_reset_download_ui()
 	_hide_faileded_ui()
 	_show_downloading_ui()
@@ -80,7 +80,7 @@ func _on_retry_button_pressed():
 func _on_download_button_pressed():
 	# clear previous download value
 	request_obj = pad_manager.fetch_asset_pack(pack_name)
-	request_obj.connect("request_completed", self, "handle_request_completed")
+	request_obj.connect("request_completed", self, "_handle_request_completed")
 	_reset_download_ui()
 	_hide_init_ui()
 	_show_downloading_ui()
@@ -135,7 +135,7 @@ func _hide_faileded_ui():
 	$ErrorIcon.hide()
 	$RetryButton.hide()
 
-func handle_request_completed(pack_name, result : PlayAssetPackState, exception):
+func _handle_request_completed(pack_name, result : PlayAssetPackState, exception):
 	_hide_downloading_ui()
 	if result.get_status() == PlayAssetPackManager.AssetPackStatus.COMPLETED:
 		var pack_location : PlayAssetPackLocation = pad_manager.get_pack_location(pack_name)
