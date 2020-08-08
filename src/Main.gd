@@ -172,6 +172,7 @@ func instantiate_pad_ui():
 	pack_download_page_instance.connect("removed_pack", self, "_on_removed_pack")
 	add_child(pack_download_page_instance)
 
+# functions used to handle signals emitted by pack_download_page_instance
 func _on_fetched_pack(pack_name):
 	downloaded_packs[pack_name] = true
 
