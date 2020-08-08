@@ -168,12 +168,14 @@ func instantiate_pad_ui():
 	pack_download_page_instance = pack_download_page_scene.instance()
 	var pad_manager = get_node("/root/PlayAssetPackManager")	
 	pack_download_page_instance.init(available_packs, pad_manager)
+	pack_download_page_instance.connect("fetched_pack", self, "_on_fetched_pack")
+	pack_download_page_instance.connect("removed_pack", self, "_on_removed_pack")
 	add_child(pack_download_page_instance)
 
-func add_downloaded_pack(pack_name):
+func _on_fetched_pack(pack_name):
 	downloaded_packs[pack_name] = true
 
-func remove_downloaded_pack(pack_name):
+func _on_removed_pack(pack_name):
 	downloaded_packs.erase(pack_name)
 
 func _ready():

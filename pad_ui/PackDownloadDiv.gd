@@ -18,9 +18,11 @@
 """
 
 extends Node2D
+signal fetched_pack(pack_name)
+signal removed_pack(pack_name)
 
 var request_obj : PlayAssetPackFetchRequest
-var pack_name
+var pack_name : String
 var pad_manager : PlayAssetPackManager
 
 func init(_pack_name : String, _pad_manager : PlayAssetPackManager):
@@ -49,11 +51,12 @@ func _process(delta):
 		var bytes_downloaded = float(request_obj.get_state().get_bytes_downloaded())
 		var bytes_to_download = float(request_obj.get_state().get_total_bytes_to_download())
 		var progress_ratio = bytes_downloaded / bytes_to_download
-		var downloaded_megabyte = str(_convert_byte_to_stepified_megabytes(bytes_downloaded))
-		var total_megabyte = str(_convert_byte_to_stepified_megabytes(bytes_to_download))
+		var downloaded_megabyte = _convert_byte_to_stepified_megabytes(bytes_downloaded)
+		var total_megabyte = _convert_byte_to_stepified_megabytes(bytes_to_download)
 		
 		if request_obj.get_state().get_status() != PlayAssetPackManager.AssetPackStatus.COMPLETED:
-			$ProgressText.text = downloaded_megabyte + "MB/" + total_megabyte + "MB"
+			var progress_text_format_string = "%fMB/%fMB"
+			$ProgressText.text = progress_text_format_string % [downloaded_megabyte, total_megabyte]
 			# start progress bar animation
 			var tween_duration = 0.4
 			$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, \
@@ -90,7 +93,7 @@ func _on_delete_button_pressed():
 	_show_init_ui()
 	pad_manager.remove_pack(pack_name)
 	# update downloaded_packs var in Main.gd
-	self.get_parent().get_parent().remove_downloaded_pack(pack_name)
+	emit_signal("removed_pack", pack_name)
 
 func _show_init_ui():
 	$TerminalStateText.text = "Not Installed"
@@ -143,6 +146,6 @@ func _handle_request_completed(pack_name, result : PlayAssetPackState, exception
 		ProjectSettings.load_resource_pack(dlc_folder + '/dlc.pck')
 		_show_completed_ui()
 		# update downloaded_packs var in Main.gd
-		self.get_parent().get_parent().add_downloaded_pack(pack_name)
+		emit_signal("fetched_pack", pack_name)
 	else:
 		_show_failed_ui()
