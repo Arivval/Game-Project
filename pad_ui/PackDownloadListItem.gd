@@ -43,7 +43,7 @@ func init(_pack_name : String, _pad_manager : PlayAssetPackManager):
 
 func _convert_byte_to_stepified_megabytes(byte_value : int):
 	# convert bytes to MB with 2 digits of precision
-	return stepify(byte_value / 1000000, 0.01)
+	return stepify(byte_value / 1000000.0, 0.01)
 
 func _process(delta):
 	if request_obj == null:
@@ -53,9 +53,9 @@ func _process(delta):
 	
 	if should_update_ui:
 		# update the downloading UI
-		var bytes_downloaded = float(request_obj.get_state().get_bytes_downloaded())
-		var bytes_to_download = float(request_obj.get_state().get_total_bytes_to_download())
-		var progress_ratio = bytes_downloaded / bytes_to_download
+		var bytes_downloaded = request_obj.get_state().get_bytes_downloaded()
+		var bytes_to_download = request_obj.get_state().get_total_bytes_to_download()
+		var progress_percent = (float(bytes_downloaded) / float(bytes_to_download)) * 100
 		var downloaded_megabyte = _convert_byte_to_stepified_megabytes(bytes_downloaded)
 		var total_megabyte = _convert_byte_to_stepified_megabytes(bytes_to_download)
 		
@@ -65,7 +65,7 @@ func _process(delta):
 			# start progress bar animation
 			var tween_duration = 0.4
 			$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, \
-				int(progress_ratio*100), tween_duration, Tween.TRANS_QUART, Tween.EASE_OUT)
+				progress_percent, tween_duration, Tween.TRANS_QUART, Tween.EASE_OUT)
 			$Tween.start()
 
 func _reset_download_ui():
