@@ -16,7 +16,7 @@
 
 extends Node2D
 
-const pack_download_list_scene = preload("res://pad_ui/pack_download_list.tscn")
+const PackDownloadListScene = preload("res://pad_ui/pack_download_list.tscn")
 
 var pack_download_list_instance
 var available_packs = ["testpack"]
@@ -165,7 +165,7 @@ func hide_pad_ui():
 	pack_download_list_instance.hide()
 
 func instantiate_pad_ui():
-	pack_download_list_instance = pack_download_list_scene.instance()
+	pack_download_list_instance = PackDownloadListScene.instance()
 	var pad_manager = get_node("/root/PlayAssetPackManager")	
 	pack_download_list_instance.init(available_packs, pad_manager)
 	pack_download_list_instance.connect("fetched_pack", self, "_on_fetched_pack")

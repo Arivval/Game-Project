@@ -21,6 +21,11 @@ extends Node2D
 signal fetched_pack(pack_name)
 signal removed_pack(pack_name)
 
+# Padding for TerminalStateText, used to account for the positions of CompletedIcon/ErrorIcon.
+# Ideally TerminalStateText should be anchored to CompletedIcon/ErrorIcon. However, since Godot only
+# supports anchoring node to parent element/viewport, this is the workaround we selected.
+const TERMINAL_STATE_TEXT_PADDING = "    "
+
 var request_obj : PlayAssetPackFetchRequest
 var pack_name : String
 var pad_manager : PlayAssetPackManager
@@ -115,8 +120,7 @@ func _hide_downloading_ui():
 	$CancelButton.hide()
 
 func _show_completed_ui():
-	# added extra spaces to account for the checkmark icon
-	$TerminalStateText.text = "    Download Completed"
+	$TerminalStateText.text = TERMINAL_STATE_TEXT_PADDING + "Download Completed"
 	$TerminalStateText.show()
 	$CompletedIcon.show()
 	$DeleteButton.show()
@@ -128,7 +132,7 @@ func _hide_completed_ui():
 
 func _show_failed_ui():
 	# added extra spaces to account for the error icon
-	$TerminalStateText.text = "    Failed"
+	$TerminalStateText.text = TERMINAL_STATE_TEXT_PADDING + "Failed"
 	$TerminalStateText.show()
 	$ErrorIcon.show()
 	$RetryButton.show()

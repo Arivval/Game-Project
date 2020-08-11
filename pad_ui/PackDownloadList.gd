@@ -21,8 +21,8 @@ signal removed_pack(pack_name)
 
 extends Node2D
 
-const pack_download_list_item_scene = preload("res://pad_ui/pack_download_list_item.tscn")
-const list_item_height = 90
+const PackDownloadListItemScene = preload("res://pad_ui/pack_download_list_item.tscn")
+const LIST_ITEM_HEIGHT = 90
 
 var pack_names : Array
 var pad_manager : PlayAssetPackManager
@@ -39,8 +39,8 @@ func init(_pack_names : Array, _pad_manager : PlayAssetPackManager):
 	pad_manager = _pad_manager
 	
 	for i in range(pack_names.size()):
-		var pack_download_list_item_instance = pack_download_list_item_scene.instance()
-		pack_download_list_item_instance.position += Vector2(0, list_item_height*i)
+		var pack_download_list_item_instance = PackDownloadListItemScene.instance()
+		pack_download_list_item_instance.position += Vector2(0, LIST_ITEM_HEIGHT*i)
 		pack_download_list_item_instance.init(pack_names[i], pad_manager)
 		pack_download_list_item_instance.connect("fetched_pack", self, "_fetched_pack_signal_router")
 		pack_download_list_item_instance.connect("removed_pack", self, "_removed_pack_signal_router")
