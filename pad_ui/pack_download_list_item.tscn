@@ -1,27 +1,27 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://font/Roboto-Medium.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://art/replay-24px.png" type="Texture" id=2]
-[ext_resource path="res://art/highlight_off-24px.png" type="Texture" id=4]
-[ext_resource path="res://pad_ui/PackDownloadDiv.gd" type="Script" id=5]
-[ext_resource path="res://art/check_circle_outline-24px.png" type="Texture" id=6]
-[ext_resource path="res://art/error_outline-24px.png" type="Texture" id=7]
-[ext_resource path="res://art/vertical_align_bottom-24px.png" type="Texture" id=8]
-[ext_resource path="res://art/delete_outline-24px.png" type="Texture" id=9]
+[ext_resource path="res://art/replay-24px.png" type="Texture" id=1]
+[ext_resource path="res://art/vertical_align_bottom-24px.png" type="Texture" id=2]
+[ext_resource path="res://font/Roboto-Medium.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://art/check_circle_outline-24px.png" type="Texture" id=4]
+[ext_resource path="res://art/error_outline-24px.png" type="Texture" id=5]
+[ext_resource path="res://art/highlight_off-24px.png" type="Texture" id=6]
+[ext_resource path="res://pad_ui/PackDownloadListItem.gd" type="Script" id=7]
+[ext_resource path="res://art/delete_outline-24px.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.254902, 0.890196, 1, 1 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 1 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
-font_data = ExtResource( 1 )
+font_data = ExtResource( 3 )
 
 [node name="Node" type="Node2D"]
 position = Vector2( 0, -100 )
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -79,7 +79,7 @@ margin_top = 404.699
 margin_right = 866.285
 margin_bottom = 832.699
 rect_scale = Vector2( 0.1, 0.1 )
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -91,7 +91,7 @@ margin_top = 414.323
 margin_right = 783.285
 margin_bottom = 841.323
 rect_scale = Vector2( 0.1, 0.1 )
-texture_normal = ExtResource( 2 )
+texture_normal = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -103,7 +103,7 @@ margin_top = 420.929
 margin_right = 785.002
 margin_bottom = 804.929
 rect_scale = Vector2( 0.1, 0.1 )
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -115,7 +115,7 @@ margin_top = 417.628
 margin_right = 747.285
 margin_bottom = 801.628
 rect_scale = Vector2( 0.1, 0.1 )
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -127,7 +127,7 @@ margin_top = 453.656
 margin_right = 469.468
 margin_bottom = 881.656
 rect_scale = Vector2( 0.03, 0.03 )
-texture_normal = ExtResource( 6 )
+texture_normal = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -139,7 +139,7 @@ margin_top = 453.656
 margin_right = 469.468
 margin_bottom = 881.656
 rect_scale = Vector2( 0.03, 0.03 )
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

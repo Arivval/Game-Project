@@ -16,9 +16,9 @@
 
 extends Node2D
 
-const pack_download_page_scene = preload("res://pad_ui/pack_download_page.tscn")
+const pack_download_list_scene = preload("res://pad_ui/pack_download_list.tscn")
 
-var pack_download_page_instance
+var pack_download_list_instance
 var available_packs = ["testpack"]
 var downloaded_packs = {}
 
@@ -159,20 +159,20 @@ func sync_player_background_y():
 	var y_delta = player_node.position.y - player_init_position.y
 
 func show_pad_ui():
-	pack_download_page_instance.show()
+	pack_download_list_instance.show()
 
 func hide_pad_ui():
-	pack_download_page_instance.hide()
+	pack_download_list_instance.hide()
 
 func instantiate_pad_ui():
-	pack_download_page_instance = pack_download_page_scene.instance()
+	pack_download_list_instance = pack_download_list_scene.instance()
 	var pad_manager = get_node("/root/PlayAssetPackManager")	
-	pack_download_page_instance.init(available_packs, pad_manager)
-	pack_download_page_instance.connect("fetched_pack", self, "_on_fetched_pack")
-	pack_download_page_instance.connect("removed_pack", self, "_on_removed_pack")
-	add_child(pack_download_page_instance)
+	pack_download_list_instance.init(available_packs, pad_manager)
+	pack_download_list_instance.connect("fetched_pack", self, "_on_fetched_pack")
+	pack_download_list_instance.connect("removed_pack", self, "_on_removed_pack")
+	add_child(pack_download_list_instance)
 
-# functions used to handle signals emitted by pack_download_page_instance
+# functions used to handle signals emitted by pack_download_list_instance
 func _on_fetched_pack(pack_name):
 	downloaded_packs[pack_name] = true
 
