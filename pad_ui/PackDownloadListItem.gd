@@ -35,8 +35,6 @@ func init(_pack_name : String, _pad_manager : PlayAssetPackManager):
 	pad_manager = _pad_manager
 	$PackName.text = pack_name
 	# get if it is installed or not
-	_show_downloading_ui()
-	return
 	var pack_installed = pad_manager.get_pack_location(pack_name) != null
 	if pack_installed:
 		_show_completed_ui()
@@ -58,7 +56,7 @@ func _process(delta):
 		var bytes_downloaded = request_obj.get_state().get_bytes_downloaded()
 		var bytes_to_download = request_obj.get_state().get_total_bytes_to_download()
 		# progress_percent must be int, or else tween animation won't work correctly
-		var progress_percent = int(float(bytes_downloaded) / float(bytes_to_download)) * 100
+		var progress_percent = int(float(bytes_downloaded) / float(bytes_to_download) * 100)
 		var downloaded_megabyte = _convert_byte_to_stepified_megabytes(bytes_downloaded)
 		var total_megabyte = _convert_byte_to_stepified_megabytes(bytes_to_download)
 		
