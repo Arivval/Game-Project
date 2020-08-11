@@ -26,12 +26,12 @@ script = ExtResource( 7 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-visible = false
 margin_left = 37.0
 margin_top = 463.753
 margin_right = 498.0
 margin_bottom = 475.753
 custom_styles/fg = SubResource( 1 )
+max_value = 1.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false

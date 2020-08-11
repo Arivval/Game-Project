@@ -55,7 +55,9 @@ func _process(delta):
 		# update the downloading UI
 		var bytes_downloaded = request_obj.get_state().get_bytes_downloaded()
 		var bytes_to_download = request_obj.get_state().get_total_bytes_to_download()
-		var progress_percent = (float(bytes_downloaded) / float(bytes_to_download)) * 100
+		# Since ProgressBar's range is from 0 to 1 and step is 0.01, round progress ratio two nearest
+		# float with 2 digits of precision.
+		var progress_ratio = stepify((float(bytes_downloaded) / float(bytes_to_download)), 0.01)
 		var downloaded_megabyte = _convert_byte_to_stepified_megabytes(bytes_downloaded)
 		var total_megabyte = _convert_byte_to_stepified_megabytes(bytes_to_download)
 		
@@ -65,7 +67,7 @@ func _process(delta):
 			# start progress bar animation
 			var tween_duration = 0.4
 			$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, \
-				progress_percent, tween_duration, Tween.TRANS_QUART, Tween.EASE_OUT)
+				progress_ratio, tween_duration, Tween.TRANS_QUART, Tween.EASE_OUT)
 			$Tween.start()
 
 func _reset_download_ui():
