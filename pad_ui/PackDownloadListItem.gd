@@ -35,6 +35,8 @@ func init(_pack_name : String, _pad_manager : PlayAssetPackManager):
 	pad_manager = _pad_manager
 	$PackName.text = pack_name
 	# get if it is installed or not
+	_show_downloading_ui()
+	return
 	var pack_installed = pad_manager.get_pack_location(pack_name) != null
 	if pack_installed:
 		_show_completed_ui()
@@ -55,9 +57,8 @@ func _process(delta):
 		# update the downloading UI
 		var bytes_downloaded = request_obj.get_state().get_bytes_downloaded()
 		var bytes_to_download = request_obj.get_state().get_total_bytes_to_download()
-		# Since ProgressBar's range is from 0 to 1 and step is 0.01, round progress ratio to nearest
-		# float with 2 digits of precision.
-		var progress_ratio = stepify((float(bytes_downloaded) / float(bytes_to_download)), 0.01)
+		# progress_percent must be int, or else tween animation won't work correctly
+		var progress_percent = int(float(bytes_downloaded) / float(bytes_to_download)) * 100
 		var downloaded_megabyte = _convert_byte_to_stepified_megabytes(bytes_downloaded)
 		var total_megabyte = _convert_byte_to_stepified_megabytes(bytes_to_download)
 		
@@ -67,8 +68,10 @@ func _process(delta):
 			# start progress bar animation
 			var tween_duration = 0.4
 			$Tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, \
-				progress_ratio, tween_duration, Tween.TRANS_QUART, Tween.EASE_OUT)
+				progress_percent, tween_duration, Tween.TRANS_QUART, Tween.EASE_OUT)
 			$Tween.start()
+
+	
 
 func _reset_download_ui():
 	$ProgressBar.value = 0
