@@ -51,6 +51,7 @@ font_data = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -37.0
@@ -181,10 +182,10 @@ __meta__ = {
 }
 
 [node name="start_button" type="Button" parent="CanvasLayer"]
-margin_left = -1.0
-margin_top = 302.0
-margin_right = 537.0
-margin_bottom = 980.0
+margin_left = 2.0
+margin_top = 756.0
+margin_right = 540.0
+margin_bottom = 1072.0
 focus_mode = 0
 custom_fonts/font = SubResource( 5 )
 shortcut_in_tooltip = false
@@ -195,10 +196,10 @@ __meta__ = {
 }
 
 [node name="button_text" type="Label" parent="CanvasLayer/start_button"]
-margin_left = -0.553
-margin_top = 495.0
-margin_right = 536.447
-margin_bottom = 533.0
+margin_left = -1.39663
+margin_top = 7.3844
+margin_right = 535.603
+margin_bottom = 45.3844
 custom_fonts/font = SubResource( 6 )
 text = "Tap to Start"
 align = 1

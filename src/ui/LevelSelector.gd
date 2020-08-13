@@ -14,9 +14,14 @@
 	limitations under the License.
 """
 
-
 extends Node2D
 
+func init(available_packs):
+	# only show Level 1-2 button if testpack is installed
+	if not available_packs.has("testpack"):
+		$Obstacle2.hide()
+	else:
+		$Obstacle2.show()
 
 func _ready():
 	pass

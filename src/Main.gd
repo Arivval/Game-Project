@@ -16,14 +16,18 @@
 
 extends Node2D
 
+const PackDownloadListScene = preload("res://pad_ui/pack_download_list.tscn")
+
+var pack_download_list_instance
+var available_packs = ["testpack"]
+var downloaded_packs = {}
+
 var score
 var player_node
-var background_node
 var canvas_node
 var level_select_node = null
 var camera_node
 var player_init_position
-var background_init_position
 var is_story_mode = true
 var score_timer
 
@@ -60,6 +64,7 @@ func unload_instantiated_obstacles():
 	
 	
 func start_game():
+	hide_pad_ui()
 	if is_story_mode:
 		unload_instantiated_obstacles()
 		load_level(current_level)
@@ -108,6 +113,7 @@ func restart_game():
 
 
 func to_main_screen():
+	show_pad_ui()
 	player_node.reset_dot_position()
 	canvas_node.hide_end_screen()
 	canvas_node.show_start_screen()
@@ -115,6 +121,7 @@ func to_main_screen():
 
 func load_level_select_screen():
 	level_select_node = load('levels/LevelSelector.tscn').instance()
+	level_select_node.init(downloaded_packs)
 	add_child(level_select_node)
 	unload_current_level()
 	unload_instantiated_obstacles()
@@ -150,20 +157,38 @@ func enable_endless_mode():
 # background along with the player to make the map seem infinite
 func sync_player_background_y():
 	var y_delta = player_node.position.y - player_init_position.y
-	background_node.rect_position.y = background_init_position.y + y_delta
 
+func show_pad_ui():
+	pack_download_list_instance.show()
+
+func hide_pad_ui():
+	pack_download_list_instance.hide()
+
+func instantiate_pad_ui():
+	pack_download_list_instance = PackDownloadListScene.instance()
+	var pad_manager = get_node("/root/PlayAssetPackManager")	
+	pack_download_list_instance.init(available_packs, pad_manager)
+	pack_download_list_instance.connect("fetched_pack", self, "_on_fetched_pack")
+	pack_download_list_instance.connect("removed_pack", self, "_on_removed_pack")
+	add_child(pack_download_list_instance)
+
+# functions used to handle signals emitted by pack_download_list_instance
+func _on_fetched_pack(pack_name):
+	downloaded_packs[pack_name] = true
+
+func _on_removed_pack(pack_name):
+	downloaded_packs.erase(pack_name)
 
 func _ready():
+	instantiate_pad_ui()
 	# to save time, find node is only executed once
 	player_node = $Player
-	background_node = $ColorRect
 	canvas_node = $CanvasLayer
 	camera_node = player_node.find_node('Camera2D')
 	
 	score_timer = $Timer
 	
 	player_init_position = player_node.position
-	background_init_position = background_node.rect_position
 	
 	# we need to initialize the UI elements to reflect the current mode
 	if is_story_mode: 
@@ -171,10 +196,8 @@ func _ready():
 	else: 
 		enable_endless_mode()
 
-
 func _process(delta):
 	sync_player_background_y()
-
 
 func _on_Timer_timeout():
 	score += 1
