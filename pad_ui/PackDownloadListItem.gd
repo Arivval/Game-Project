@@ -55,6 +55,9 @@ func _process(delta):
 		# update the downloading UI
 		var bytes_downloaded = request_obj.get_state().get_bytes_downloaded()
 		var bytes_to_download = request_obj.get_state().get_total_bytes_to_download()
+		if bytes_to_download == 0:
+			# invalid state, return to avoid divide by 0 error
+			return
 		# progress_percent must be int, or else tween animation won't work correctly
 		var progress_percent = bytes_downloaded * 100 / bytes_to_download
 		var downloaded_megabyte = _convert_byte_to_stepified_megabytes(bytes_downloaded)
